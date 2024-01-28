@@ -10,22 +10,22 @@ const Navbar = () => {
       </div>
       <div className="navbar__items">
         <Link to="#">
-          <Typography.Link>Home</Typography.Link>
+          <Typography>Home</Typography>
         </Link>
         <Link to="#">
-          <Typography.Link>About Us</Typography.Link>
+          <Typography>About Us</Typography>
         </Link>
         <Link to="#">
-          <Typography.Link>Services</Typography.Link>
+          <Typography>Services</Typography>
         </Link>
         <Link to="#">
-          <Typography.Link>Inventory</Typography.Link>
+          <Typography>Inventory</Typography>
         </Link>
         <Link to="#">
-          <Typography.Link>Blog</Typography.Link>
+          <Typography>Blog</Typography>
         </Link>
         <Link to="#">
-          <Typography.Link>Shop</Typography.Link>
+          <Typography>Shop</Typography>
         </Link>
         {/* <Link to="#">
           <Typography.Link>FAQ</Typography.Link>

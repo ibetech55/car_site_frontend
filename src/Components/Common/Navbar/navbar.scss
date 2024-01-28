@@ -4,6 +4,8 @@
   justify-content: space-between;
   margin: 0 auto;
   min-height: 10vh;
+  position: relative;
+  z-index: 9999;
   &__logo {
     width: 125px;
     height: 45px;

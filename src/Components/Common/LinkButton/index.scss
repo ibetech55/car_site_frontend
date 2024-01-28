@@ -1,5 +1,19 @@
+
+
 .link-button {
     button {
         font-weight: bold;
+    }
+    &__default-button {
+        :hover {
+            background-color: #fff !important;
+            color: $primary-color !important;
+        }
+    }
+    &__outline-button {
+        :hover {
+            background-color: $primary-color !important;
+            color: #fff !important;
+        }
     }
 }

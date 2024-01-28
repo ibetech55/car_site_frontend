@@ -19,7 +19,7 @@ const HomeHeader = () => {
           </Typography>
           <div className="home-header__content-info__buttons">
             <LinkButton
-              href="#header2"
+              href="#home-search"
               title="View Cars"
               id="view-cars"
               outline

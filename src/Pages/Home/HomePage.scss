@@ -10,73 +10,28 @@
     position: relative;
   }
 
-  &__header2 {
-    width: 80%;
-    margin: 0 auto;
-    position: relative;
-    top: -6rem;
-    background-color: rgba(256, 256, 256, 1);
-    box-shadow: rgba(60, 64, 67, 0.3) 0px 1px 2px 0px,
-      rgba(60, 64, 67, 0.15) 0px 1px 3px 1px;
-  }
-  #section3 {
+
+
+  &__section {
+    height: 100%;
     width: 100%;
-    height: 100vh;
-    background-color: #fff;
   }
-}
 
-// @media screen and (max-width: 1150px) {
-//   .home-page {
-//     width: 90%;
-//   }
-// }
 
-// @media screen and (max-width: 1000px) {
-//   .home-page {
-//     width: 95%;
-//   }
-// }
-
-// @media screen and (max-width: 1075px) {
-//   .home-page {
-//     &__header2 {
-//       margin-top: 0;
-//     }
-//   }
-// }
-@media screen and (max-height: 730px) {
-  .home-page {
-    padding-bottom: 0;
-  }
-  .home-page__header2 {
-    position: relative;
-    top: 0%;
-  }
-}
-// @media screen and (max-height: 420px) {
-//   .diagonal-shape {
-//     min-height: 100%;
-//   }
-// }
-
-section {
-  height: 100%;
-  width: 100%;
-  .diagonal-shape {
+  &__diagonal-shape {
     position: absolute;
     top: 0;
     right: 0;
     bottom: 0 !important;
-    width: 50%; /* Adjust the width as needed */
+    width: 50%; 
     height: 100%;
     background-color: rgba(
       0,
       7,
       64,
       0.3
-    ); /* Adjust the background color as needed */
-    // transform: skew(20deg); /* Adjust the angle of the diagonal */
+    );
+
     clip-path: polygon(
       100% 0,
       100% 0,
@@ -86,10 +41,37 @@ section {
       21% 64%,
       53% 0
     );
-
     z-index: -99999;
   }
+
+  &__search-section {
+    width: 100%;
+    height: 100vh;
+    background-color: #fff;
+  }
+
+  &__search {
+    width: 80%;
+    margin: 0 auto;
+    position: relative;
+    top: -6rem;
+    background-color: rgba(256, 256, 256, 1);
+    box-shadow: rgba(60, 64, 67, 0.3) 0px 1px 2px 0px,
+      rgba(60, 64, 67, 0.15) 0px 1px 3px 1px;
+  }
 }
+
+@media screen and (max-height: 730px) {
+  .home-page {
+    padding-bottom: 0;
+  }
+  .home-page__search {
+    position: relative;
+    top: 0%;
+  }
+}
+
+
 
 @media screen and (max-width: 796px) {
   .home-page {
@@ -97,7 +79,7 @@ section {
       padding-bottom: 0;
     }
 
-    #section3 {
+    &__search-section {
       padding: 2rem 0;
     }
   }

@@ -1,4 +1,4 @@
-import { Button, Typography } from "antd";
+import { Button } from "antd";
 import { SizeType } from "antd/es/config-provider/SizeContext";
 import './index.scss';
 
@@ -21,7 +21,7 @@ const LinkButton: React.FC<IProps> = ({
   outline = false,
 }) => {
   return (
-    <Typography.Link href={href} style={style} className="link-button">
+    <a href={href} style={style} className={!outline ? 'link-button link-button__default-button' :'link-button link-button__outline-button' }>
       <Button
         id={id}
         type={type}
@@ -34,7 +34,7 @@ const LinkButton: React.FC<IProps> = ({
       >
         {title}
       </Button>
-    </Typography.Link>
+    </a>
   );
 };
 
