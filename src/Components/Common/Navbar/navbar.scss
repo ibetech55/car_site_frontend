@@ -1,0 +1,46 @@
+.navbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin: 0 auto;
+  min-height: 10vh;
+  &__logo {
+    width: 125px;
+    height: 45px;
+    img {
+      height: 100%;
+      width: 100%;
+    }
+  }
+
+  &__items {
+    display: flex;
+    a {
+      padding: 15px 0;
+        font-weight: bold;
+        width: 100px;
+      &:hover {
+        text-decoration: underline;
+        color:$primary-color;
+      }
+    }
+  }
+
+  &__buttons {
+    display: flex;
+  }
+
+  &__buttons button {
+    &:first-child {
+        margin-right: 1em;
+      }
+  }
+}
+
+@media screen and (max-width: 1025px) {
+  .navbar {
+   &__items {
+    display: none;
+   }
+  }
+}

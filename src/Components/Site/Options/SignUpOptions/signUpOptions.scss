@@ -1,0 +1,58 @@
+.sign-up-options {
+  &__content {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    height: 100%;
+  }
+  &__flex {
+    width: 100%;
+  }
+  &__card {
+    padding: 2rem 0;
+    width: 30%;
+     box-shadow: rgba(60, 64, 67, 0.3) 0px 1px 2px 0px, rgba(60, 64, 67, 0.15) 0px 1px 3px 1px;
+
+    &-title{
+      margin-bottom: 1rem !important;
+    }
+    &:hover {
+      border: 1px solid $primary-color;
+      cursor: pointer;
+      background-color: $primary-color;
+      color: #ffffff !important;
+
+      .sign-up-options__card-title,
+      .sign-up-options__card-icon {
+        color: #ffffff !important;
+      }
+    }
+  }
+  &__card-title {
+    color: $primary-color !important;
+    text-align: center;
+    position: relative;
+  }
+  &__card-icon {
+    font-size: 80px;
+    display: block;
+    color: $primary-color;
+  }
+
+  @media screen and (max-width: 1050px) {
+    &__flex {
+      display: block;
+    }
+    &__card {
+      width: 90%;
+      margin: 0 auto 1rem auto;
+    }
+  }
+
+  @media screen and (max-width: 480px) {
+    .sign-up-options__card-title{
+      font-size: 24px;
+    }
+  }
+}

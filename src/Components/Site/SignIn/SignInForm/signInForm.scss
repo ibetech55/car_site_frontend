@@ -1,0 +1,50 @@
+.sign-in-form {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  height: 100vh;
+  &__image {
+    flex: 2.5;
+    height: 100%;
+    background-image: url("/assets/sign-in-image.webp");
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: 60% 60%;
+  }
+  &__overlay {
+    width: 100%;
+    height: 100%;
+    background-color: rgba($color: #000000, $alpha: 0.5);
+  }
+  &__form {
+    flex: 1;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 0 2em;
+  }
+  &__title {
+    text-align: center;
+  }
+  &__logo-image {
+    text-align: center;
+    img {
+      width: 100px;
+      height: 50px;
+    }
+  }
+  &__links {
+    text-align: center;
+  }
+
+  @media screen and (max-width: 1050px) {
+    .sign-in-form {
+      display: block;
+    }
+
+    .sign-in-form__image {
+      display: none;
+    }
+  }
+}

@@ -1,0 +1,46 @@
+@import "./Theme/Scss/variables";
+
+:root {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  scroll-behavior: smooth;
+
+}
+
+body {
+  margin: 0;
+  overflow-x: hidden;
+}
+
+a {
+  display: block;
+  color: $primary-color !important;
+  text-decoration: none;
+}
+a:hover {
+  color: $primary-color;
+  text-decoration: underline !important;
+}
+label {
+  font-weight: bold;
+}
+
+h1 {
+  margin: 0 !important;
+}
+
+// Pages
+@import "./Pages/Home/HomePage";
+@import "./Pages/Options";
+
+// Components Site
+@import "./Components/Site/Home/HomeHeader/HomeHeader";
+@import "./Components/Site/Home/HomeSearch/HomeSearch";
+@import "./Components/Site/SignIn/SignInForm/signInForm";
+@import "./Components/Site/Options/SignUpOptions/signUpOptions";
+
+// Components Common
+@import "./Components/Common/Navbar/navbar";
+@import "./Components/Common/BackButton/backButton";
+@import "./Components/Common/LinkButton/index.scss";
