@@ -1,0 +1,18 @@
+.default-button {
+  font-weight: bold !important;
+
+  &__default {
+    &:hover {
+        background-color: #fff !important;
+        color: $primary-color !important;
+      }
+  }
+
+
+  &__outline-button {
+    &:hover {
+      background-color: $primary-color !important;
+      color: #fff !important;
+    }
+  }
+}

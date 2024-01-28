@@ -15,6 +15,9 @@
   &__section {
     height: 100%;
     width: 100%;
+    background-color: $light-gray;
+    position: relative;
+    z-index: 9999;
   }
 
 
@@ -54,6 +57,7 @@
     width: 80%;
     margin: 0 auto;
     position: relative;
+    z-index: 9999;
     top: -6rem;
     background-color: rgba(256, 256, 256, 1);
     box-shadow: rgba(60, 64, 67, 0.3) 0px 1px 2px 0px,
@@ -63,7 +67,10 @@
 
 @media screen and (max-height: 730px) {
   .home-page {
-    padding-bottom: 0;
+    &__header {
+      padding-bottom: 6rem;
+
+    }
   }
   .home-page__search {
     position: relative;
@@ -76,7 +83,7 @@
 @media screen and (max-width: 796px) {
   .home-page {
     &__header {
-      padding-bottom: 0;
+      padding-bottom: 2rem;
     }
 
     &__search-section {

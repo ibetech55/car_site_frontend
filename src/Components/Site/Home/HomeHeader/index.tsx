@@ -23,6 +23,7 @@ const HomeHeader = () => {
               title="View Cars"
               id="view-cars"
               outline
+              pageScroll
             />
             <LinkButton href="#header2" title="Learn More" id="learn-more" />
           </div>

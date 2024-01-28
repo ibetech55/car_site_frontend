@@ -1,6 +1,7 @@
-import { Button } from "antd";
 import { SizeType } from "antd/es/config-provider/SizeContext";
-import './index.scss';
+import { Link } from "react-router-dom";
+import DefaultButton from "../DefaultButton";
+import "./index.scss";
 
 interface IProps {
   href: string;
@@ -10,6 +11,7 @@ interface IProps {
   size?: SizeType;
   style?: React.CSSProperties;
   outline?: boolean;
+  pageScroll?: boolean;
 }
 const LinkButton: React.FC<IProps> = ({
   href,
@@ -19,21 +21,27 @@ const LinkButton: React.FC<IProps> = ({
   type = "primary",
   size = "large",
   outline = false,
+  pageScroll,
 }) => {
-  return (
-    <a href={href} style={style} className={!outline ? 'link-button link-button__default-button' :'link-button link-button__outline-button' }>
-      <Button
-        id={id}
+  return !pageScroll ? (
+    <Link to={href} style={style}>
+      <DefaultButton
+        title={title}
         type={type}
         size={size}
-        ghost={outline}
-        style={{
-          boxShadow:
-            "rgba(60, 64, 67, 0.3) 0px 1px 2px 0px, rgba(60, 64, 67, 0.15) 0px 2px 6px 2px",
-        }}
-      >
-        {title}
-      </Button>
+        outline={outline}
+        id={id}
+      />
+    </Link>
+  ) : (
+    <a href={href} style={style}>
+      <DefaultButton
+        title={title}
+        type={type}
+        size={size}
+        outline={outline}
+        id={id}
+      />
     </a>
   );
 };

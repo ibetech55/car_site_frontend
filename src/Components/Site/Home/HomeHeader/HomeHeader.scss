@@ -89,6 +89,10 @@
 
 @media screen and (max-width: 1650px) {
   .home-header {
+    &__content-info {
+      position: relative;
+      top: -6rem;
+    }
     &__content-image {
       &-car{
         top: 15%;
@@ -125,7 +129,7 @@
 @media screen and (max-width: 1345px) {
   .home-header {
     &__content-info {
-      margin-top: 6rem;
+      top: -6rem;
     }
     &__content-image {
       &-car{
@@ -157,7 +161,6 @@
         top: 20%;
         height: 350px;
         width: 550px;
-        // right: -25%;
       }
     }
   }
@@ -171,7 +174,6 @@
         top: 30%;
         height: 350px;
         width: 500px;
-        // right: -25%;
       }
     }
   }
@@ -182,11 +184,10 @@
     &__content-image {
 
       &-car{
-        top: 50%;
+        top: 30%;
         position: absolute;
         height: 300px;
         width: 450px;
-        // right: -25%;
       }
     }
   }
@@ -210,7 +211,7 @@
     &__content {
       display: block;
       &-info {
-        margin-top: 4rem;
+        top: -4rem;
       }
     }
     &__content-image {

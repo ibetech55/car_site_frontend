@@ -1,6 +1,7 @@
-import { Button, Form, Input, Typography } from "antd";
+import { Form, Input, Typography } from "antd";
 import { Link } from "react-router-dom";
 import "./signInForm.scss";
+import DefaultButton from "../../../Common/DefaultButton";
 
 const SignInForm = () => {
   return (
@@ -31,9 +32,7 @@ const SignInForm = () => {
             <Input />
           </Form.Item>
           <Form.Item>
-            <Button htmlType="submit" type="primary" block>
-              Sign In
-            </Button>
+            <DefaultButton title="Sign In" block size="middle"/>
           </Form.Item>
           <div className="sign-in-form__links">
             <Link to="/">Forgot email or Password</Link>

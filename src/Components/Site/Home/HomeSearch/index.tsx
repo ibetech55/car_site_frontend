@@ -1,5 +1,6 @@
 import { SearchOutlined } from "@ant-design/icons";
-import { Button, Col, Row, Select, Typography } from "antd";
+import { Col, Row, Select, Typography } from "antd";
+import DefaultButton from "../../../Common/DefaultButton";
 
 const HomeSearch = () => {
   const yearsData = () => {
@@ -88,10 +89,8 @@ const HomeSearch = () => {
         </Col>
         <Col {...cols}>
           <div className="home-search__button">
-            <Button type="primary" icon={<SearchOutlined />}>
-              Search
-            </Button>
-            <Button type="primary">Advanced Search</Button>
+            <DefaultButton title="Search" icon={<SearchOutlined />} />
+            <DefaultButton title="Advanced Search" />
           </div>
         </Col>
       </Row>
