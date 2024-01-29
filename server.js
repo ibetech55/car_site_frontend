@@ -4,7 +4,7 @@ import history from 'connect-history-api-fallback'
 const app = express();
 app.use(history());
 
-app.use("/", './dist');
+app.use("/", express.static('./dist'));
 
 let port = process.env.PORT || 3000 ;
 app.listen(port, () => console.log("Listening to Port:", port));
