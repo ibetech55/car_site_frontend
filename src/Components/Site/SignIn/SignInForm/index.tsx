@@ -10,13 +10,13 @@ const SignInForm = () => {
         <div className="sign-in-form__overlay"></div>
       </div>
       <div className="sign-in-form__form">
-        <Typography.Title className="sign-in-form__title">
-          Car Site
-        </Typography.Title>
-        <div className="sign-in-form__logo-image">
-          <img src="/assets/logo.png" alt="logo pic" />
-        </div>
         <Form layout="vertical">
+          <Typography.Title className="sign-in-form__title">
+            Car Site
+          </Typography.Title>
+          <div className="sign-in-form__logo-image">
+            <img src="/assets/logo.png" alt="logo pic" />
+          </div>
           <Form.Item
             className="sign-in-form__label"
             label="E-mail"
@@ -32,7 +32,7 @@ const SignInForm = () => {
             <Input />
           </Form.Item>
           <Form.Item>
-            <DefaultButton title="Sign In" block size="middle"/>
+            <DefaultButton title="Sign In" block size="middle" />
           </Form.Item>
           <div className="sign-in-form__links">
             <Link to="/">Forgot email or Password</Link>

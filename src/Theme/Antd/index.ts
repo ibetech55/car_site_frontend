@@ -11,10 +11,6 @@ export const theme: ConfigProviderProps = {
         verticalLabelPadding: 0,
         itemMarginBottom: 10,
       },
-      // Select: {
-      //   colorBorder: primaryColor,
-      //   colorTextPlaceholder: primaryColor,
-      // },
     },
   },
   button: {

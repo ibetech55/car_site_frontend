@@ -1,6 +1,6 @@
 .home-page-container {
   position: relative;
-  z-index: 9999;
+  z-index: 100;
 }
 .home-page {
   &__header {
@@ -17,7 +17,7 @@
     width: 100%;
     background-color: $light-gray;
     position: relative;
-    z-index: 9999;
+    z-index: 101;
   }
 
 
@@ -44,7 +44,7 @@
       21% 64%,
       53% 0
     );
-    z-index: -99999;
+    z-index: -100;
   }
 
   &__search-section {
@@ -57,7 +57,7 @@
     width: 80%;
     margin: 0 auto;
     position: relative;
-    z-index: 9999;
+    z-index: 110;
     top: -6rem;
     background-color: rgba(256, 256, 256, 1);
     box-shadow: rgba(60, 64, 67, 0.3) 0px 1px 2px 0px,
@@ -74,18 +74,24 @@
   }
   .home-page__search {
     position: relative;
-    top: 0%;
+    top: 0;
   }
 }
-
-
 
 @media screen and (max-width: 796px) {
   .home-page {
     &__header {
-      padding-bottom: 2rem;
+     height: 100vh;
+  padding-bottom: 0;
+    
     }
-
+    &__content-info {
+      display: flex;
+      align-items: center;
+    }
+&__search {
+  top: 0;
+}
     &__search-section {
       padding: 2rem 0;
     }
