@@ -11,6 +11,7 @@ interface IProps {
   outline?: boolean;
   icon?: React.ReactNode;
   block?: boolean;
+  htmlType?: "button" | "submit" | "reset" | undefined;
 }
 const DefaultButton: React.FC<IProps> = ({
   title,
@@ -19,7 +20,8 @@ const DefaultButton: React.FC<IProps> = ({
   size = "large",
   outline = false,
   icon,
-  block
+  block,
+  htmlType
 }) => {
   return (
     <Button
@@ -34,6 +36,7 @@ const DefaultButton: React.FC<IProps> = ({
       ghost={outline}
       icon={icon}
       block={block}
+      htmlType={htmlType}
       style={{
         boxShadow:
           "rgba(60, 64, 67, 0.3) 0px 1px 2px 0px, rgba(60, 64, 67, 0.15) 0px 2px 6px 2px",
