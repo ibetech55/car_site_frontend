@@ -27,7 +27,7 @@ const authSlice = createSlice({
               state.auth = true;
               state.loginToken = action.payload.login_token;
               state.loading = false
-              window.location.href = "/"
+              // window.location.href = "/"
             }
           )
     },
