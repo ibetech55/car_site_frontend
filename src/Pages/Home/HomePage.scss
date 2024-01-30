@@ -10,8 +10,6 @@
     position: relative;
   }
 
-
-
   &__section {
     height: 100%;
     width: 100%;
@@ -20,20 +18,14 @@
     z-index: 101;
   }
 
-
   &__diagonal-shape {
     position: absolute;
     top: 0;
     right: 0;
     bottom: 0 !important;
-    width: 50%; 
+    width: 50%;
     height: 100%;
-    background-color: rgba(
-      0,
-      7,
-      64,
-      0.3
-    );
+    background-color: rgbaPrimaryColor(0.3);
 
     clip-path: polygon(
       100% 0,
@@ -69,7 +61,6 @@
   .home-page {
     &__header {
       padding-bottom: 6rem;
-
     }
   }
   .home-page__search {
@@ -81,17 +72,16 @@
 @media screen and (max-width: 796px) {
   .home-page {
     &__header {
-     height: 100vh;
-  padding-bottom: 0;
-    
+      height: 100vh;
+      padding-bottom: 0;
     }
     &__content-info {
       display: flex;
       align-items: center;
     }
-&__search {
-  top: 0;
-}
+    &__search {
+      top: 0;
+    }
     &__search-section {
       padding: 2rem 0;
     }

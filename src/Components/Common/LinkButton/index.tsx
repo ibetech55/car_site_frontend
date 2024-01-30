@@ -6,7 +6,7 @@ import "./index.scss";
 interface IProps {
   href: string;
   title: string;
-  id: string;
+  id?: string;
   type?: "primary" | "link" | "text" | "default" | "dashed" | undefined;
   size?: SizeType;
   style?: React.CSSProperties;

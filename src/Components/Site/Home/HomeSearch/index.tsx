@@ -1,10 +1,32 @@
 import { SearchOutlined } from "@ant-design/icons";
-import { Col, Row, Select, Typography } from "antd";
+import { Col, Input, Row, Select, Typography } from "antd";
 import DefaultButton from "../../../Common/DefaultButton";
-import { yearsList } from "../../../../Utils/YearsList";
+import { useEffect } from "react";
+import { ISelect } from "../../../../Data/Common/ISelect";
+import { minList } from "../../../../Utils/SearchLists/MInList";
+import { maxList } from "../../../../Utils/SearchLists/MaxList";
+import { DistanceList } from "../../../../Utils/SearchLists/DistanceList";
+import LinkButton from "../../../Common/LinkButton";
 
-const HomeSearch = () => {
+interface IProps {
+  makesList: ISelect[];
+  modelsList: ISelect[];
+  handleGetMakesList: () => void;
+  handleGetModelsListById: (id: string) => void;
+}
+
+const HomeSearch: React.FC<IProps> = ({
+  makesList,
+  handleGetMakesList,
+  handleGetModelsListById,
+  modelsList,
+}) => {
   const cols = { xs: 24, sm: 24, md: 12, lg: 8, xl: 8 };
+  const cols2 = { xs: 12, sm: 12, md: 12, lg: 12, xl: 12 };
+
+  useEffect(() => {
+    handleGetMakesList();
+  }, []);
 
   return (
     <div className="home-search">
@@ -16,23 +38,10 @@ const HomeSearch = () => {
         <Col {...cols}>
           <Select
             className="home-search__select"
-            placeholder="Year"
-            options={yearsList()}
-            size="large"
-          />
-        </Col>
-
-        <Col {...cols}>
-          <Select
-            className="home-search__select"
             placeholder="Make"
             size="large"
-            options={[
-              { value: "jack", label: "Jack" },
-              { value: "lucy", label: "Lucy" },
-              { value: "Yiminghe", label: "yiminghe" },
-              { value: "disabled", label: "Disabled", disabled: true },
-            ]}
+            options={[{ value: null, label: "All Makes" }, ...makesList]}
+            onChange={(value) => handleGetModelsListById(value)}
           />
         </Col>
         <Col {...cols}>
@@ -40,53 +49,44 @@ const HomeSearch = () => {
             className="home-search__select"
             placeholder="Model"
             size="large"
-            options={[
-              { value: "jack", label: "Jack" },
-              { value: "lucy", label: "Lucy" },
-              { value: "Yiminghe", label: "yiminghe" },
-            ]}
+            options={[{ value: "", label: "All Models" }, ...modelsList]}
           />
         </Col>
         <Col {...cols}>
-          <Select
-            className="home-search__select"
-            placeholder="Price"
-            size="large"
-            options={[
-              { value: "jack", label: "Jack" },
-              { value: "lucy", label: "Lucy" },
-              { value: "Yiminghe", label: "yiminghe" },
-            ]}
-          />
+          <Row gutter={[8, 8]}>
+            <Col {...cols2}>
+              <Select
+                className="home-search__select"
+                placeholder="Min Price"
+                size="large"
+                options={minList}
+              />
+            </Col>
+            <Col {...cols2}>
+              <Select
+                className="home-search__select"
+                placeholder="Max Price"
+                size="large"
+                options={maxList}
+              />
+            </Col>
+          </Row>
         </Col>
         <Col {...cols}>
-          <Select
-            className="home-search__select"
-            placeholder="Zip Code"
-            size="large"
-            options={[
-              { value: "jack", label: "Jack" },
-              { value: "lucy", label: "Lucy" },
-              { value: "Yiminghe", label: "yiminghe" },
-            ]}
-          />
+          <Input placeholder="Zip Code" size="large" />
         </Col>
         <Col {...cols}>
           <Select
             className="home-search__select"
             placeholder="Distance"
             size="large"
-            options={[
-              { value: "jack", label: "Jack" },
-              { value: "lucy", label: "Lucy" },
-              { value: "Yiminghe", label: "yiminghe" },
-            ]}
+            options={DistanceList}
           />
         </Col>
         <Col {...cols}>
           <div className="home-search__button">
             <DefaultButton title="Search" icon={<SearchOutlined />} />
-            <DefaultButton title="Advanced Search" />
+            <LinkButton href="/advanced_search" title="Advanced Search" />
           </div>
         </Col>
       </Row>

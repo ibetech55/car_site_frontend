@@ -1,5 +1,5 @@
 import { ConfigProviderProps } from "antd";
-const primaryColor = "#000740";
+import { primaryColor } from "../PrimaryColor/PrimaryColor";
 export const theme: ConfigProviderProps = {
   theme: {
     token: {

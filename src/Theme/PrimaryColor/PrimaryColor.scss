@@ -1,0 +1,5 @@
+$primary-color: #000740;
+@function rgbaPrimaryColor($alpha) {
+    $rgba: rgba(0, 7, 64, $alpha);
+    @return $rgba;
+  }

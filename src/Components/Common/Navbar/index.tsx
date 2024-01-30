@@ -36,7 +36,7 @@ const Navbar = () => {
       </div>
       <div className="navbar__buttons">
         <LinkButton href="/signin" title="Sign In" id="sign-in" />
-        <LinkButton href="/signup" title="Sign Up" id="sign-up" />
+        <LinkButton href="/sign_up_options" title="Sign Up" id="sign-up" />
       </div>
     </nav>
   );
