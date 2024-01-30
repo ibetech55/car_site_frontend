@@ -6,6 +6,7 @@ import RegisterDealership from "../Components/Site/RegisterDealership";
 import RegisterUser from "../Components/Site/RegisterUser";
 import Dashboard from "../Pages/Dashboard";
 import Cookies from 'js-cookie';
+import AdvancedSearch from "../Pages/AdvancedSearch";
 function AppRoutes() {
   return (
     <div>
@@ -18,7 +19,8 @@ function AppRoutes() {
           <Routes>
             <Route path="/" element={<Home />} />
             <Route path="/signin" element={<SignIn />} />
-            <Route path="/options" element={<Options />} />
+            <Route path="/sign_up_options" element={<Options />} />
+            <Route path="/advanced_search" element={<AdvancedSearch />} />
             <Route
               path="/register_dealership"
               element={<RegisterDealership />}
