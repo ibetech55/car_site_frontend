@@ -24,8 +24,14 @@ const HomeHeader = () => {
               id="view-cars"
               outline
               pageScroll
+              size="large"
             />
-            <LinkButton href="#header2" title="Learn More" id="learn-more" />
+            <LinkButton
+              href="#header2"
+              title="Learn More"
+              id="learn-more"
+              size="large"
+            />
           </div>
         </div>
         <div className="home-header__content-image">

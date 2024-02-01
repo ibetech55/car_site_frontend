@@ -1,0 +1,15 @@
+.register-private-user-form {
+  &__title {
+    text-align: center;
+  }
+
+  form {
+    margin-top: 1rem;
+  }
+  &__datepicker {
+    width: 100% !important;
+  }
+  &__button-row {
+    text-align: right;
+  }
+}
