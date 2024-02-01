@@ -19,7 +19,7 @@ const LinkButton: React.FC<IProps> = ({
   id,
   style,
   type = "primary",
-  size = "large",
+  size = "middle",
   outline = false,
   pageScroll,
 }) => {

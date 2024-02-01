@@ -22,21 +22,30 @@ a:hover {
 }
 label {
   font-weight: bold;
+  color: $gray-color;
 }
 
 h1 {
   margin: 0 !important;
 }
 
+.row-gutter-bottom {
+  margin-bottom: 1rem;
+}
+
 // Pages
 @import "./Pages/Home/HomePage";
 @import "./Pages/Options";
+@import "./Pages/RegisterPrivateUser";
+@import "./Pages/RegisterDealership";
 
 // Components Site
 @import "./Components/Site/Home/HomeHeader/HomeHeader";
 @import "./Components/Site/Home/HomeSearch/HomeSearch";
 @import "./Components/Site/SignIn/SignInForm/signInForm";
 @import "./Components/Site/Options/SignUpOptions/signUpOptions";
+@import "./Components/Site/RegisterPrivateUser/RegisterPrivateUserForm";
+@import "./Components/Site/RegisterDealership/RegisterDealershipForm";
 
 // Components Common
 @import "./Components/Common/Navbar/navbar";

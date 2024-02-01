@@ -1,7 +1,7 @@
 import { Button } from "antd";
 import { SizeType } from "antd/es/config-provider/SizeContext";
 import React from "react";
-import './index.scss';
+import "./index.scss";
 
 interface IProps {
   title: string;
@@ -12,16 +12,18 @@ interface IProps {
   icon?: React.ReactNode;
   block?: boolean;
   htmlType?: "button" | "submit" | "reset" | undefined;
+  onClick?: React.MouseEventHandler<HTMLElement> | undefined;
 }
 const DefaultButton: React.FC<IProps> = ({
   title,
   id,
   type = "primary",
-  size = "large",
+  size = "middle",
   outline = false,
   icon,
   block,
-  htmlType
+  htmlType,
+  onClick,
 }) => {
   return (
     <Button
@@ -37,6 +39,7 @@ const DefaultButton: React.FC<IProps> = ({
       icon={icon}
       block={block}
       htmlType={htmlType}
+      onClick={onClick}
       style={{
         boxShadow:
           "rgba(60, 64, 67, 0.3) 0px 1px 2px 0px, rgba(60, 64, 67, 0.15) 0px 2px 6px 2px",
