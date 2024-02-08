@@ -7,18 +7,18 @@ import "./signInForm.scss";
 
 interface IProps {
   handleLogin: (values: LoginFormDto) => void;
+  loginError: string;
 }
 
 const initForm: LoginFormDto = {
   password: "",
   email: "",
 };
-const SignInForm: React.FC<IProps> = ({ handleLogin }) => {
+const SignInForm: React.FC<IProps> = ({
+  handleLogin,
+  loginError,
+}) => {
   const [form, setForm] = useState(initForm);
-
-  const handleSubmit = () => {
-    handleLogin(form);
-  };
 
   const handleChange = (
     e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
@@ -32,13 +32,16 @@ const SignInForm: React.FC<IProps> = ({ handleLogin }) => {
         <div className="sign-in-form__overlay"></div>
       </div>
       <div className="sign-in-form__form">
-        <Form layout="vertical" onFinish={handleSubmit}>
+        <Form layout="vertical" onFinish={() => handleLogin(form)}>
           <Typography.Title className="sign-in-form__title">
             Car Site
           </Typography.Title>
           <div className="sign-in-form__logo-image">
             <img src="/assets/logo.png" alt="logo pic" />
           </div>
+          <Typography className="sign-in-form__login-error">
+            {loginError}
+          </Typography>
           <Form.Item
             className="sign-in-form__label"
             label="E-mail"
@@ -68,7 +71,7 @@ const SignInForm: React.FC<IProps> = ({ handleLogin }) => {
           </Form.Item>
           <div className="sign-in-form__links">
             <Link to="/">Forgot email or Password</Link>
-            <Link to="/options">Sign Up</Link>
+            <Link to="/sign_up_options">Sign Up</Link>
           </div>
         </Form>
       </div>

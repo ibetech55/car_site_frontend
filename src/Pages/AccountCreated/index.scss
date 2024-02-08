@@ -1,0 +1,11 @@
+.account-created {
+  &__card {
+    width: 50%;
+    margin: 3rem auto 0 auto;
+    box-shadow: $box-shadow;
+  }
+
+  &__logo {
+    text-align: center;
+  }
+}

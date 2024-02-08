@@ -42,6 +42,10 @@
   &__links {
     text-align: center;
   }
+  &__login-error {
+    text-align: center;
+    color: red;
+  }
 
   @media screen and (max-width: 1050px) {
     .sign-in-form {

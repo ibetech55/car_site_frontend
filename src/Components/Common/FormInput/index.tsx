@@ -24,7 +24,7 @@ const FormInput: React.FC<IProps> = ({
   type
 }) => {
   return (
-    <div>
+    <div className="form-input">
       <label htmlFor={id}>{required && <span style={{color: 'red'}}>* </span>}{label}</label>
       <Input
         placeholder={placeholder}

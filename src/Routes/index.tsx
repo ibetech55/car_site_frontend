@@ -1,33 +1,61 @@
-import { BrowserRouter, Route, Routes } from "react-router-dom";
+import { BrowserRouter, Navigate, Route, Routes } from "react-router-dom";
 import Home from "../Pages/Home";
 import SignIn from "../Pages/SignIn";
 import Options from "../Pages/Options";
-import Dashboard from "../Pages/Dashboard";
-import Cookies from 'js-cookie';
 import AdvancedSearch from "../Pages/AdvancedSearch";
 import RegisterUser from "../Pages/RegisterPrivateUser";
 import RegisterDealership from "../Pages/RegisterDealership";
 import ActivateAccount from "../Pages/ActivateAccount";
+import AccountCreated from "../Pages/AccountCreated";
+import { Dashboard } from "../Pages/Dashboard";
+import { getCookie } from "../Utils/HandleCookie";
+import { LOGIN_TOKEN } from "../Configs/Constants/Tokens";
+import { getSessionData } from "../Utils/HandleSessionStorage";
+import { CREATED_USER_TOKEN } from "../Configs/Constants/User";
 function AppRoutes() {
+  const loggedIn = getCookie(LOGIN_TOKEN) && (
+    <Routes>
+      <Route path="/" element={<Dashboard />} />
+      <Route path="/account_created" element={<AccountCreated />} />
+      <Route
+        path="/activate_account/:account_token"
+        element={<ActivateAccount />}
+      />
+      <Route path="*" element={<Navigate to="/" />} />
+    </Routes>
+  );
+
+  const createdUserToken = (getSessionData(CREATED_USER_TOKEN) as string) && (
+    <Routes>
+      <Route path="/signin" element={<SignIn />} />
+      <Route path="/account_created" element={<AccountCreated />} />
+      <Route path="*" element={<Navigate to="/" />} />
+    </Routes>
+  );
+
+  const notLoggedIn = !getCookie(LOGIN_TOKEN) && (
+    <Routes>
+      <Route path="/" element={<Home />} />
+      <Route path="/signin" element={<SignIn />} />
+      <Route path="/sign_up_options" element={<Options />} />
+      <Route path="/advanced_search" element={<AdvancedSearch />} />
+      <Route path="/register_user" element={<RegisterUser />} />
+      <Route path="/register_dealership" element={<RegisterDealership />} />
+      <Route
+        path="/activate_account/:account_token"
+        element={<ActivateAccount />}
+      />
+    </Routes>
+  );
+
+  const getRoutes = () => {
+    if (loggedIn) return loggedIn;
+    else if (createdUserToken) return createdUserToken;
+    else if (notLoggedIn) return notLoggedIn;
+  };
   return (
     <div>
-      <BrowserRouter>
-        {Cookies.get('login_token') ? (
-          <Routes>
-            <Route path="/" element={<Dashboard />} />
-          </Routes>
-        ) : (
-          <Routes>
-            <Route path="/" element={<Home />} />
-            <Route path="/signin" element={<SignIn />} />
-            <Route path="/sign_up_options" element={<Options />} />
-            <Route path="/advanced_search" element={<AdvancedSearch />} />
-            <Route path="/register_user" element={<RegisterUser />} />
-            <Route path="/register_dealership" element={<RegisterDealership />} />
-            <Route path="/activate_account" element={<ActivateAccount />} />
-          </Routes>
-        )}
-      </BrowserRouter>
+      <BrowserRouter>{getRoutes()}</BrowserRouter>
     </div>
   );
 }

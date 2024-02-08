@@ -38,6 +38,8 @@ h1 {
 @import "./Pages/Options";
 @import "./Pages/RegisterPrivateUser";
 @import "./Pages/RegisterDealership";
+@import "./Pages/ActivateAccount";
+@import "./Pages/AccountCreated";
 
 // Components Site
 @import "./Components/Site/Home/HomeHeader/HomeHeader";
@@ -46,9 +48,12 @@ h1 {
 @import "./Components/Site/Options/SignUpOptions/signUpOptions";
 @import "./Components/Site/RegisterPrivateUser/RegisterPrivateUserForm";
 @import "./Components/Site/RegisterDealership/RegisterDealershipForm";
+@import "./Components/Site/ActivateAccount/ActivateAccountForm";
 
 // Components Common
 @import "./Components/Common/Navbar/navbar";
 @import "./Components/Common/BackButton/backButton";
 @import "./Components/Common/LinkButton/index.scss";
 @import "./Components/Common/DefaultButton/index.scss";
+@import "./Components/Common/HeaderText";
+@import "./Components/Common/FormInput";

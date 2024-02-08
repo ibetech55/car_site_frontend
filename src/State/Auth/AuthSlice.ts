@@ -6,7 +6,11 @@ import { LoginResponseDto } from "../../Data/AuthDtos/loginDtos";
 const authSlice = createSlice({
   name: "auth",
   initialState,
-  reducers: {},
+  reducers: {
+    clearLoginError: (state) => {
+      state.loginError = ''
+    }
+  },
   extraReducers(builder) {
     builder
       .addCase(authLogin.pending, (state) => {
@@ -18,9 +22,13 @@ const authSlice = createSlice({
           state.auth = true;
           state.loginToken = action.payload.login_token;
           state.loading = false;
-          window.location.href = "/";
         }
-      );
+      )
+      .addCase(authLogin.rejected, (state, action) => {
+        state.loginError = action.payload as string;
+      });
   },
 });
+
+export const { clearLoginError } = authSlice.actions;
 export default authSlice.reducer;

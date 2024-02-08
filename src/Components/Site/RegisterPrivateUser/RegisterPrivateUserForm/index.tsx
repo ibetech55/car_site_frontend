@@ -8,6 +8,7 @@ import FormInput from "../../../Common/FormInput";
 import { formValidations } from "./FormValidations";
 import { handleFormChange } from "../../../../Utils/HandleFormChange";
 import "./index.scss";
+import useClearError from "../../../../Utils/UseClearError";
 
 const initForm: CreatePrivateUserFormDto = {
   firstName: "",
@@ -67,6 +68,8 @@ const RegisterUserForm: React.FC<IProps> = ({
       setForm({ ...form, userImage: selectedFile });
     }
   };
+
+  useClearError({ action: () => setErrors({}), errorObject: errors });
 
   return (
     <Card className="register-private-user-form">
