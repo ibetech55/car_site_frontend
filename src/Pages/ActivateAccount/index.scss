@@ -1,0 +1,33 @@
+.activate-account-page {
+  padding-top: 5rem;
+  section {
+    width: 30%;
+    margin: 2rem auto 0 auto;
+    box-shadow: $box-shadow;
+  }
+  &__logo {
+    text-align: center;
+    display: flex;
+    justify-content: center;
+  }
+  &__text {
+    text-align: center;
+    font-size: 16px;
+  }
+}
+
+@media screen and (max-width: 1025px) {
+  .activate-account-page {
+    section {
+      width: 85%;
+    }
+  }
+}
+
+@media screen and (max-width: 796px) {
+  .activate-account-page {
+    section {
+      width: 95%;
+    }
+  }
+}

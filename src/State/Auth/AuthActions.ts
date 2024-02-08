@@ -12,9 +12,9 @@ export const authLogin = createAsyncThunk(
         const { data } = await axios.post(`${VITE_AUTH_API_URL}/auth/login`, values);
         return data;
       } catch (error: any) {
-        return rejectWithValue(
+        throw rejectWithValue(
           error.response.data.message
-        ) as unknown as LoginResponseDto;
+        ) as unknown as string;
       }
     }
   );

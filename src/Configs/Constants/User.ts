@@ -1,0 +1,1 @@
+export const CREATED_USER_TOKEN = 'creates-user-token';

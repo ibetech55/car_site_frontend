@@ -1,13 +1,13 @@
-import { SignInForm } from "../../Components/Site/SignIn/SignInForm"
-import useAuth from "../../Hooks/UseAuth"
+import { SignInForm } from "../../Components/Site/SignIn/SignInForm";
+import useAuth from "../../Hooks/UseAuth";
 
 const SignIn = () => {
-  const {handleLogin} = useAuth();
+  const { handleLogin, loginError } = useAuth();
   return (
     <div>
-      <SignInForm handleLogin={handleLogin} />
+      <SignInForm handleLogin={handleLogin} loginError={loginError} />
     </div>
-  )
-}
+  );
+};
 
-export default SignIn
+export default SignIn;

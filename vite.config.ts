@@ -13,5 +13,10 @@ export default defineConfig({
         additionalData: `@import './src/Theme/Scss/_variables.scss';`, // Import global variables
       },
     },
+  },
+  resolve: {
+    alias: {
+      process: "process/browser"
+    }
   }
 })

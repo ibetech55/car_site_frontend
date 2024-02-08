@@ -6,6 +6,7 @@ import { CreateDealershipFormDto } from "../../../../Data/UserDtos/CreateDealers
 import FormInput from "../../../Common/FormInput";
 import { formValidations } from "./FormValidations";
 import { handleFormChange } from "../../../../Utils/HandleFormChange";
+import useClearError from "../../../../Utils/UseClearError";
 
 const initForm: CreateDealershipFormDto = {
   contactName: "",
@@ -63,6 +64,8 @@ const RegisterUserForm: React.FC<IProps> = ({
       setForm({ ...form, dealershipLogo: selectedFile });
     }
   };
+
+  useClearError({ action: () => setErrors({}), errorObject: errors });
 
   return (
     <Card className="register-dealership-form">

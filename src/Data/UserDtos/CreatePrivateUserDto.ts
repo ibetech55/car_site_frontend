@@ -11,3 +11,5 @@ export interface CreatePrivateUserFormDto {
   phoneNumber: string;
   userImage?: File
 }
+
+
