@@ -25,13 +25,13 @@ function AppRoutes() {
     </Routes>
   );
 
-  const createdUserToken = (getSessionData(CREATED_USER_TOKEN) as string) && (
-    <Routes>
-      <Route path="/signin" element={<SignIn />} />
-      <Route path="/account_created" element={<AccountCreated />} />
-      <Route path="*" element={<Navigate to="/" />} />
-    </Routes>
-  );
+  // const createdUserToken = (getSessionData(CREATED_USER_TOKEN) as string) && (
+  //   <Routes>
+  //     <Route path="/signin" element={<SignIn />} />
+  //     <Route path="/account_created" element={<AccountCreated />} />
+  //     <Route path="*" element={<Navigate to="/" />} />
+  //   </Routes>
+  // );
 
   const notLoggedIn = !getCookie(LOGIN_TOKEN) && (
     <Routes>
@@ -41,6 +41,7 @@ function AppRoutes() {
       <Route path="/advanced_search" element={<AdvancedSearch />} />
       <Route path="/register_user" element={<RegisterUser />} />
       <Route path="/register_dealership" element={<RegisterDealership />} />
+      <Route path="/account_created" element={<AccountCreated />} />
       <Route
         path="/activate_account/:account_token"
         element={<ActivateAccount />}
@@ -50,7 +51,6 @@ function AppRoutes() {
 
   const getRoutes = () => {
     if (loggedIn) return loggedIn;
-    else if (createdUserToken) return createdUserToken;
     else if (notLoggedIn) return notLoggedIn;
   };
   return (
