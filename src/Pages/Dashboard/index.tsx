@@ -1,21 +1,15 @@
 import DefaultButton from "../../Components/Common/DefaultButton";
 import { WithAuth } from "../../Components/Template/WithAuth";
-import { removeCookie } from "../../Utils/HandleCookie";
+import useAuth from "../../Hooks/UseAuth";
 
 const DashboardPage = () => {
+  const { handleLogout } = useAuth();
   return (
     <div>
       Dashboard
-      <DefaultButton
-        title="Log off"
-        onClick={() => {
-          removeCookie("login_token");
-          removeCookie("auth_token");
-          window.location.href = "/";
-        }}
-      />
+      <DefaultButton title="Log off" onClick={() => handleLogout()} />
     </div>
   );
 };
 
-export const Dashboard = WithAuth(DashboardPage)
+export const Dashboard = WithAuth(DashboardPage);

@@ -13,10 +13,9 @@ import { CreateDealershipFormDto } from "../../Data/UserDtos/CreateDealershipDto
 import { formatDateIso } from "../../Utils/FormatDateIso";
 import useClearError from "../../Utils/UseClearError";
 import { clearAccessCodeError, clearErrorRegisterUser } from "../../State/User/UserSlice";
-import { useNavigate } from "react-router";
+import { GetUserDto } from "../../Data/UserDtos/GetUserDto";
 
 const useUser = () => {
-  const navigate = useNavigate();
   const userData = useSelector((state: RootState) => state.user);
 
   const dispatch = useDispatch<AppDispatch>();
@@ -43,7 +42,8 @@ const useUser = () => {
     formData.append("userImage", values.userImage as File);
 
     await dispatch(createPrivateUser(formData));
-    navigate("/account_created");
+    window.location.href = "/account_created"
+
   };
 
   const handleCreateDealership = async (values: CreateDealershipFormDto) => {
@@ -68,19 +68,20 @@ const useUser = () => {
     formData.append("dealershipLogo", values.dealershipLogo as File);
 
     await dispatch(createDealership(formData));
-    navigate("/account_created");
+    window.location.href = "/account_created"
   };
 
   const handleConfirmCreatedUser = async (token: string) => {
     await dispatch(confirmCreatedUser(token));
   };
 
-  const handleGetUserById = async (id: string) => {
-    await dispatch(getUserById(id));
+  const handleGetUserById = async (id: string): Promise<GetUserDto> => {
+    const data = await dispatch(getUserById(id)).unwrap();
+    return data
   };
 
   const handleGetByAccessCodeToken = async (token: string) => {
-    await dispatch(getByAccessCodeToken(token));
+    await dispatch(getByAccessCodeToken(token)).unwrap();
   };
 
   const handleConfirmAccessCode = async (
