@@ -42,8 +42,6 @@ const useUser = () => {
     formData.append("userImage", values.userImage as File);
 
     await dispatch(createPrivateUser(formData));
-    window.location.href = "/account_created"
-
   };
 
   const handleCreateDealership = async (values: CreateDealershipFormDto) => {
@@ -68,7 +66,6 @@ const useUser = () => {
     formData.append("dealershipLogo", values.dealershipLogo as File);
 
     await dispatch(createDealership(formData));
-    window.location.href = "/account_created"
   };
 
   const handleConfirmCreatedUser = async (token: string) => {

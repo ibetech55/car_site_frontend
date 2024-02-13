@@ -26,6 +26,7 @@ const userSlice = createSlice({
         state.loading = false;
         state.errorRegisterUser = "";
         sessionStorage.setItem(CREATED_USER_TOKEN, action.payload)
+        window.location.href = "/account_created"
       })
       .addCase(createPrivateUser.rejected, (state, action) => {
         state.errorRegisterUser = action.payload as string;
@@ -38,6 +39,7 @@ const userSlice = createSlice({
         state.loading = false;
         state.errorRegisterUser = "";
         sessionStorage.setItem(CREATED_USER_TOKEN, action.payload)
+        window.location.href = "/account_created"
       })
       .addCase(createDealership.rejected, (state, action) => {
         state.errorRegisterUser = action.payload as string;
