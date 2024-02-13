@@ -19,5 +19,19 @@ export const authLogin = createAsyncThunk(
     }
   );
 
+  export const authLogout = createAsyncThunk(
+    "auth/logout",
+    async (_, { rejectWithValue }): Promise<boolean> => {
+      try {
+        const { data } = await axios.get(`${VITE_AUTH_API_URL}/auth/logout`);
+        return data;
+      } catch (error: any) {
+        throw rejectWithValue(
+          error.response.data.message
+        ) as unknown as string;
+      }
+    }
+  );
+
 
   

@@ -10,8 +10,7 @@ import AccountCreated from "../Pages/AccountCreated";
 import { Dashboard } from "../Pages/Dashboard";
 import { getCookie } from "../Utils/HandleCookie";
 import { LOGIN_TOKEN } from "../Configs/Constants/Tokens";
-import { getSessionData } from "../Utils/HandleSessionStorage";
-import { CREATED_USER_TOKEN } from "../Configs/Constants/User";
+import Error from "../Pages/Error";
 function AppRoutes() {
   const loggedIn = getCookie(LOGIN_TOKEN) && (
     <Routes>
@@ -21,17 +20,10 @@ function AppRoutes() {
         path="/activate_account/:account_token"
         element={<ActivateAccount />}
       />
+            <Route path="/error" element={<Error />} />
       <Route path="*" element={<Navigate to="/" />} />
     </Routes>
   );
-
-  // const createdUserToken = (getSessionData(CREATED_USER_TOKEN) as string) && (
-  //   <Routes>
-  //     <Route path="/signin" element={<SignIn />} />
-  //     <Route path="/account_created" element={<AccountCreated />} />
-  //     <Route path="*" element={<Navigate to="/" />} />
-  //   </Routes>
-  // );
 
   const notLoggedIn = !getCookie(LOGIN_TOKEN) && (
     <Routes>

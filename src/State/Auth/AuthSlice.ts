@@ -1,6 +1,6 @@
 import { PayloadAction, createSlice } from "@reduxjs/toolkit";
 import { initialState } from "./AuthState";
-import { authLogin } from "./AuthActions";
+import { authLogin, authLogout } from "./AuthActions";
 import { LoginResponseDto } from "../../Data/AuthDtos/loginDtos";
 
 const authSlice = createSlice({
@@ -26,7 +26,20 @@ const authSlice = createSlice({
       )
       .addCase(authLogin.rejected, (state, action) => {
         state.loginError = action.payload as string;
-      });
+      })
+      .addCase(authLogout.pending, (state) => {
+        state.loading = true;
+      })
+      .addCase(
+        authLogout.fulfilled,
+        (state) => {
+          state.auth = false;
+          state.loading = false;
+        }
+      )
+      .addCase(authLogout.rejected, (state, action) => {
+        state.loginError = action.payload as string;
+      })
   },
 });
 
