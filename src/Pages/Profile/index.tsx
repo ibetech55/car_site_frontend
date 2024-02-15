@@ -7,11 +7,25 @@ import UserDetails from "../../Components/Site/Profile/UserDetails";
 import { WithAuth } from "../../Components/Template/WithAuth";
 import { DEALERSHIP_ACCOUNT } from "../../Configs/Constants/UserTypes";
 import SiteModal from "../../Components/Common/SiteModal";
-import { UpdateUserDto } from "../../Data/UserDtos/UpdateUserDto";
+import {
+  UpdateDealershipFormDto,
+  UpdatePrivateUserFormDto,
+} from "../../Data/UserDtos/UpdateUserDto";
 import useUser from "../../Hooks/UseUser";
+import ModalUpdatePrivateUser from "../../Components/Site/Profile/ModalUpdatePrivateUser";
+import { formatDate } from "../../Utils/FormatDate";
+import LoadingComponent from "../../Components/Common/Loading";
+import {
+  IErrorsUpdatePrivateUser,
+  formValidationPrivateUser,
+} from "../../Components/Site/Profile/ModalUpdatePrivateUser/FormValidationPrivateUser";
+import useClearError from "../../Utils/UseClearError";
+import {
+  IErrorsUpdateDealership,
+  formValidationDealership,
+} from "../../Components/Site/Profile/ModalUpdateDealership/FormValidationDealership";
 
-
-const initForm: UpdateUserDto = {
+const initFormDealership: UpdateDealershipFormDto = {
   contactName: "",
   dealershipName: "",
   phoneNumber: "",
@@ -21,10 +35,70 @@ const initForm: UpdateUserDto = {
   zipCode: "",
 };
 
+const initFormPrivateUser: UpdatePrivateUserFormDto = {
+  firstName: "",
+  lastName: "",
+  phoneNumber: "",
+  street: "",
+  state: "",
+  city: "",
+  zipCode: "",
+  dateOfBirth: "",
+};
+
 const ProfilePage: React.FC = () => {
   const [openModalUpdateUser, setOpenModalUpdateUser] = useState(false);
-  const [formProfile, setFormProfile] = useState<UpdateUserDto>(initForm);
-  const { handleGetUserById, loggedUser, userData } = useUser();
+  const [errorsPrivateUser, setErrorsPrivateUser] =
+    useState<IErrorsUpdatePrivateUser>({});
+  const [errorsDealership, setErrorsDealership] =
+    useState<IErrorsUpdateDealership>({});
+
+  const [formDealership, setFormDealership] =
+    useState<UpdateDealershipFormDto>(initFormDealership);
+  const [formPrivateUser, setFormPrivateUser] =
+    useState<UpdatePrivateUserFormDto>(initFormPrivateUser);
+  const {
+    handleGetUserById,
+    loggedUser,
+    userData,
+    handleUpdatePrivateUser,
+    loading,
+    handleUpdateDealership
+  } = useUser();
+
+  const handleSubmitPUser = () => {
+    setErrorsPrivateUser({});
+    const { hasErros, formErros } = formValidationPrivateUser(formPrivateUser);
+    if (!hasErros) {
+      handleUpdatePrivateUser(
+        userData.privateUser?.id as string,
+        formPrivateUser
+      );
+      setOpenModalUpdateUser(false);
+    } else {
+      setErrorsPrivateUser(formErros);
+    }
+  };
+
+  const handleSubmitDealer = () => {
+    setErrorsDealership({});
+    const { hasErros, formErros } = formValidationDealership(formDealership);
+    if (!hasErros) {
+      handleUpdateDealership(userData.dealership?.id as string, formDealership);
+      setOpenModalUpdateUser(false);
+    } else {
+      setErrorsDealership(formErros);
+    }
+  };
+
+  useClearError({
+    action: () => setErrorsPrivateUser({}),
+    errorObject: errorsPrivateUser,
+  });
+  useClearError({
+    action: () => setErrorsDealership({}),
+    errorObject: errorsDealership,
+  });
 
   useEffect(() => {
     handleGetUserById(loggedUser.id);
@@ -33,6 +107,7 @@ const ProfilePage: React.FC = () => {
   return (
     <>
       <div className="profile-page">
+        <LoadingComponent loading={loading} />
         <HeaderText
           text={
             userData.userType === DEALERSHIP_ACCOUNT
@@ -78,37 +153,62 @@ const ProfilePage: React.FC = () => {
           />
         </div>
       </div>
-      <SiteModal
-        open={openModalUpdateUser}
-        onCancel={() => {
-          setFormProfile({
-            contactName: userData.dealership?.contactName as string,
-            dealershipName: userData.dealership?.dealershipName as string,
-            phoneNumber: userData.phoneNumber,
-            street: userData.address.street,
-            state: userData.address.state,
-            zipCode: userData.address.zipCode,
-            city: userData.address.city,
-          });
-          setOpenModalUpdateUser(false);
-        }}
-        title="Update User"
-        width={900}
-      >
-        {userData.userType === DEALERSHIP_ACCOUNT ? (
+      {userData.userType === DEALERSHIP_ACCOUNT ? (
+        <SiteModal
+          handleConfirm={handleSubmitDealer}
+          open={openModalUpdateUser}
+          onCancel={() => {
+            setFormDealership({
+              contactName: userData.dealership?.contactName as string,
+              dealershipName: userData.dealership?.dealershipName as string,
+              phoneNumber: userData.phoneNumber,
+              street: userData.address.street,
+              state: userData.address.state,
+              zipCode: userData.address.zipCode,
+              city: userData.address.city,
+            });
+            setOpenModalUpdateUser(false);
+          }}
+          title="Update User"
+          width={900}
+        >
           <ModalUpdateDealership
             userData={userData}
-            form={formProfile}
-            setForm={setFormProfile}
+            form={formDealership}
+            setForm={setFormDealership}
+            errors={errorsDealership}
           />
-        ) : (
-          <ModalUpdateDealership
+        </SiteModal>
+      ) : (
+        <SiteModal
+          open={openModalUpdateUser}
+          onCancel={() => {
+            setFormPrivateUser({
+              firstName: userData.privateUser?.firstName as string,
+              lastName: userData.privateUser?.lastName as string,
+              phoneNumber: userData.phoneNumber,
+              street: userData.address.street,
+              state: userData.address.state,
+              zipCode: userData.address.zipCode,
+              city: userData.address.city,
+              dateOfBirth: formatDate(
+                userData.privateUser?.dateOfBirth as string
+              ),
+            });
+            setOpenModalUpdateUser(false);
+          }}
+          title="Update User"
+          width={900}
+          handleConfirm={handleSubmitPUser}
+        >
+          <ModalUpdatePrivateUser
             userData={userData}
-            form={formProfile}
-            setForm={setFormProfile}
+            form={formPrivateUser}
+            setForm={setFormPrivateUser}
+            errors={errorsPrivateUser}
           />
-        )}
-      </SiteModal>
+        </SiteModal>
+      )}
     </>
   );
 };

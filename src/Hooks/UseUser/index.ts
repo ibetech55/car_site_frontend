@@ -8,14 +8,25 @@ import {
   getByAccessCodeToken,
   getLoggedUser,
   getUserById,
+  updateDealership,
+  updatePrivateUser,
 } from "../../State/User/UserActions";
 import { CreatePrivateUserFormDto } from "../../Data/UserDtos/CreatePrivateUserDto";
 import { CreateDealershipFormDto } from "../../Data/UserDtos/CreateDealershipDto";
 import { formatDateIso } from "../../Utils/FormatDateIso";
 import useClearError from "../../Utils/UseClearError";
-import { clearAccessCodeError, clearErrorRegisterUser } from "../../State/User/UserSlice";
+import {
+  clearAccessCodeError,
+  clearErrorRegisterUser,
+} from "../../State/User/UserSlice";
 import { GetUserDto } from "../../Data/UserDtos/GetUserDto";
 import { GetLoggedUserDto } from "../../Data/UserDtos/GetLoggedUserDto";
+import {
+  UpdateDealershipDto,
+  UpdateDealershipFormDto,
+  UpdatePrivateUserDto,
+  UpdatePrivateUserFormDto,
+} from "../../Data/UserDtos/UpdateUserDto";
 
 const useUser = () => {
   const userData = useSelector((state: RootState) => state.user);
@@ -76,12 +87,12 @@ const useUser = () => {
 
   const handleGetUserById = async (id: string): Promise<GetUserDto> => {
     const data = await dispatch(getUserById(id)).unwrap();
-    return data
+    return data;
   };
 
   const handleGetLoggedUser = async (id: string): Promise<GetLoggedUserDto> => {
     const data = await dispatch(getLoggedUser(id)).unwrap();
-    return data
+    return data;
   };
 
   const handleGetByAccessCodeToken = async (token: string) => {
@@ -93,8 +104,61 @@ const useUser = () => {
     accessCodeToken: string
   ) => {
     await dispatch(
-      confirmAccessCode({ id: userData.accessCodeTokenResponse.userId, accessCode, accessCodeToken })
+      confirmAccessCode({
+        id: userData.accessCodeTokenResponse.userId,
+        accessCode,
+        accessCodeToken,
+      })
     );
+  };
+
+  const handleUpdatePrivateUser = async (
+    id: string,
+    values: UpdatePrivateUserFormDto
+  ) => {
+    const requestData: UpdatePrivateUserDto = {
+      privateUser: {
+        id,
+        firstName: values.firstName,
+        lastName: values.lastName,
+        dateOfBirth: values.dateOfBirth,
+      },
+      user: {
+        phoneNumber: values.phoneNumber,
+      },
+      address: {
+        state: values.state,
+        city: values.city,
+        street: values.street,
+        zipCode: values.zipCode,
+      },
+    };
+    await dispatch(updatePrivateUser(requestData)).unwrap();
+    await dispatch(getUserById(userData.user.id))
+  };
+
+  const handleUpdateDealership = async (
+    id: string,
+    values: UpdateDealershipFormDto
+  ) => {
+    const requestData: UpdateDealershipDto = {
+      dealership: {
+        id,
+        contactName: values.contactName,
+        dealershipName: values.dealershipName,
+      },
+      user: {
+        phoneNumber: values.phoneNumber,
+      },
+      address: {
+        state: values.state,
+        city: values.city,
+        street: values.street,
+        zipCode: values.zipCode,
+      },
+    };
+    await dispatch(updateDealership(requestData)).unwrap();
+    await dispatch(getUserById(userData.user.id))
   };
 
   useClearError({
@@ -107,10 +171,8 @@ const useUser = () => {
     errorString: [userData.confirmAccessCodeError],
   });
 
-
-
   return {
-    loadingUser: userData.loading,
+    loading: userData.loading,
     handleCreatePrivateUser,
     handleCreateDealership,
     registerUserError: userData.errorRegisterUser,
@@ -124,7 +186,9 @@ const useUser = () => {
     confirmAccessCodeResponse: userData.confirmAccessCodeResponse,
     handleConfirmAccessCode,
     handleGetLoggedUser,
-    loggedUser: userData.loggedUser
+    loggedUser: userData.loggedUser,
+    handleUpdatePrivateUser,
+    handleUpdateDealership
   };
 };
 

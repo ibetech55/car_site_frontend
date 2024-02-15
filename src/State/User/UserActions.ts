@@ -6,6 +6,7 @@ import { GetUserDto } from "../../Data/UserDtos/GetUserDto";
 import { GetByAccessCodeTokenDto } from "../../Data/UserDtos/GetByAccessCodeTokenDto";
 import { PutConfirmAccessCodeDto } from "../../Data/UserDtos/ConfirmAccessCodeDtos";
 import { GetLoggedUserDto } from "../../Data/UserDtos/GetLoggedUserDto";
+import { UpdateDealershipDto, UpdatePrivateUserDto } from "../../Data/UserDtos/UpdateUserDto";
 
 export const createPrivateUser = createAsyncThunk(
   "user/createPrivateUser",
@@ -108,6 +109,40 @@ export const getLoggedUser = createAsyncThunk(
     try {
       const { data } = await axios.get(
         `${VITE_USER_API_URL}/user/loggedUser/${id}`
+      );
+      return data;
+    } catch (error: any) {
+      throw rejectWithValue(error.response.data.message) as unknown as string;
+    }
+  }
+);
+
+export const updatePrivateUser = createAsyncThunk(
+  "user/updatePrivateUser",
+  async (
+    values: UpdatePrivateUserDto,
+    { rejectWithValue }
+  ): Promise<boolean> => {
+    try {
+      const { data } = await axios.put(
+        `${VITE_USER_API_URL}/privateUser/${values.privateUser.id}`, values
+      );
+      return data;
+    } catch (error: any) {
+      throw rejectWithValue(error.response.data.message) as unknown as string;
+    }
+  }
+);
+
+export const updateDealership = createAsyncThunk(
+  "user/updateDealership",
+  async (
+    values: UpdateDealershipDto,
+    { rejectWithValue }
+  ): Promise<boolean> => {
+    try {
+      const { data } = await axios.put(
+        `${VITE_USER_API_URL}/dealership/${values.dealership.id}`, values
       );
       return data;
     } catch (error: any) {
