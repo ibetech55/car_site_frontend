@@ -20,6 +20,9 @@ a:hover {
   color: $primary-color;
   text-decoration: underline !important;
 }
+
+
+
 label {
   font-weight: bold;
   color: $gray-color;
@@ -40,6 +43,7 @@ h1 {
 @import "./Pages/RegisterDealership";
 @import "./Pages/ActivateAccount";
 @import "./Pages/AccountCreated";
+@import "./Pages/Profile";
 
 // Components Site
 @import "./Components/Site/Home/HomeHeader/HomeHeader";
@@ -49,6 +53,9 @@ h1 {
 @import "./Components/Site/RegisterPrivateUser/RegisterPrivateUserForm";
 @import "./Components/Site/RegisterDealership/RegisterDealershipForm";
 @import "./Components/Site/ActivateAccount/ActivateAccountForm";
+@import "./Components/Site/Profile/ProfileDetails";
+@import "./Components/Site/Profile/ProfileItem";
+@import "./Components/Site/Profile/UserDetails";
 
 // Components Common
 @import "./Components/Common/Navbar/navbar";
@@ -57,3 +64,6 @@ h1 {
 @import "./Components/Common/DefaultButton/index.scss";
 @import "./Components/Common/HeaderText";
 @import "./Components/Common/FormInput";
+@import "./Components/Common/SiteNavbar";
+@import "./Components/Template/SiteTemplate";
+@import "./Components/Common/SiteModal";

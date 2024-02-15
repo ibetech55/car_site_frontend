@@ -6,6 +6,7 @@ import {
   createDealership,
   createPrivateUser,
   getByAccessCodeToken,
+  getLoggedUser,
   getUserById,
 } from "../../State/User/UserActions";
 import { CreatePrivateUserFormDto } from "../../Data/UserDtos/CreatePrivateUserDto";
@@ -14,6 +15,7 @@ import { formatDateIso } from "../../Utils/FormatDateIso";
 import useClearError from "../../Utils/UseClearError";
 import { clearAccessCodeError, clearErrorRegisterUser } from "../../State/User/UserSlice";
 import { GetUserDto } from "../../Data/UserDtos/GetUserDto";
+import { GetLoggedUserDto } from "../../Data/UserDtos/GetLoggedUserDto";
 
 const useUser = () => {
   const userData = useSelector((state: RootState) => state.user);
@@ -77,6 +79,11 @@ const useUser = () => {
     return data
   };
 
+  const handleGetLoggedUser = async (id: string): Promise<GetLoggedUserDto> => {
+    const data = await dispatch(getLoggedUser(id)).unwrap();
+    return data
+  };
+
   const handleGetByAccessCodeToken = async (token: string) => {
     await dispatch(getByAccessCodeToken(token)).unwrap();
   };
@@ -116,6 +123,8 @@ const useUser = () => {
     confirmAccessCodeError: userData.confirmAccessCodeError,
     confirmAccessCodeResponse: userData.confirmAccessCodeResponse,
     handleConfirmAccessCode,
+    handleGetLoggedUser,
+    loggedUser: userData.loggedUser
   };
 };
 

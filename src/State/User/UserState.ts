@@ -1,4 +1,5 @@
 import { GetByAccessCodeTokenDto } from "../../Data/UserDtos/GetByAccessCodeTokenDto";
+import { GetLoggedUserDto } from "../../Data/UserDtos/GetLoggedUserDto";
 import { GetUserDto } from "../../Data/UserDtos/GetUserDto";
 
 export const initUser: GetUserDto = {
@@ -35,6 +36,14 @@ export const accessCodeTokenResponse:GetByAccessCodeTokenDto = {
   userId: "",
   accountStatus: ""
 }
+
+export const initGetLoggedUser:GetLoggedUserDto = {
+  id: "",
+  active: false,
+  accountStatus: "",
+  userType: ""
+}
+
 export interface UserState {
   loading: boolean;
   errorRegisterUser: string;
@@ -44,7 +53,10 @@ export interface UserState {
   accessCodeTokenResponse:GetByAccessCodeTokenDto;
   confirmAccessCodeResponse: boolean;
   confirmAccessCodeError: string;
+  loggedUser:GetLoggedUserDto;
 }
+
+
 
 export const initialState: UserState = {
   loading: false,
@@ -54,5 +66,6 @@ export const initialState: UserState = {
   user: initUser,
   accessCodeTokenResponse:accessCodeTokenResponse,
   confirmAccessCodeResponse: false,
-  confirmAccessCodeError: ''
+  confirmAccessCodeError: '',
+  loggedUser: initGetLoggedUser
 };

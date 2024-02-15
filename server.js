@@ -11,4 +11,4 @@ app.use("/", express.static(path.join('dist')));
 app.use("/activate_account/:account_token", express.static(path.join('dist')));
 
 let port = process.env.PORT || 3000;
-app.listen(port, () => console.log(`Listening to Port: ${process.env.PUBLIC_URL}`));
+app.listen(port, () => console.log(`%cListening to Port: ${process.env.PUBLIC_URL}`, 'color: blue;'));

@@ -1,0 +1,13 @@
+.profile-page {
+  max-width: 1000px;
+  margin: 0 auto;
+
+  &__update-buttons {
+    margin-top: 1rem;
+    button {
+      &:first-child {
+        margin-right: 1rem;
+      }
+    }
+  }
+}

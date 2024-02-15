@@ -10,18 +10,21 @@ import AccountCreated from "../Pages/AccountCreated";
 import { Dashboard } from "../Pages/Dashboard";
 import { getCookie } from "../Utils/HandleCookie";
 import { LOGIN_TOKEN } from "../Configs/Constants/Tokens";
-import Error from "../Pages/Error";
+import { SiteTemplate } from "../Components/Template/SiteTemplate";
+import { Profile } from "../Pages/Profile";
 function AppRoutes() {
   const loggedIn = getCookie(LOGIN_TOKEN) && (
     <Routes>
-      <Route path="/" element={<Dashboard />} />
-      <Route path="/account_created" element={<AccountCreated />} />
-      <Route
-        path="/activate_account/:account_token"
-        element={<ActivateAccount />}
-      />
-            <Route path="/error" element={<Error />} />
-      <Route path="*" element={<Navigate to="/" />} />
+      <Route element={<SiteTemplate />}>
+        <Route path="/" element={<Dashboard />} />
+        <Route path="/account_created" element={<AccountCreated />} />
+        <Route
+          path="/activate_account/:account_token"
+          element={<ActivateAccount />}
+        />
+        <Route path="/profile" element={<Profile />} />
+        <Route path="*" element={<Navigate to="/" />} />
+      </Route>
     </Routes>
   );
 
@@ -38,6 +41,7 @@ function AppRoutes() {
         path="/activate_account/:account_token"
         element={<ActivateAccount />}
       />
+      <Route path="*" element={<Navigate to="/" />} />
     </Routes>
   );
 

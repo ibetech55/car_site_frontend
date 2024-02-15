@@ -11,6 +11,15 @@ export const theme: ConfigProviderProps = {
         verticalLabelPadding: 0,
         itemMarginBottom: 10,
       },
+      Dropdown: {
+        controlItemBgHover: primaryColor,
+      },
+      Modal: {
+        paddingMD: 0,
+        paddingContentHorizontalLG: 0,
+        marginSM: 0,
+        marginXS: 0,
+      },
     },
   },
   button: {

@@ -1,0 +1,19 @@
+.site-modal {
+  &__header {
+    border-bottom: $gray-line;
+    font-size: 20px !important;
+    padding: 0.5rem;
+  }
+  &__footer {
+    border-top: $gray-line;
+    padding: 0.5rem;
+    button {
+      &:first-child {
+        margin-right: 1rem;
+      }
+    }
+  }
+  &__children {
+    padding: 1.5rem;
+  }
+}

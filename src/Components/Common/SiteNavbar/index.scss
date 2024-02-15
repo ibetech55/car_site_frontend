@@ -1,0 +1,52 @@
+.site-navbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin: 0 auto;
+  min-height: 10vh;
+
+  &__logo {
+    width: 125px;
+    height: 45px;
+    img {
+      height: 100%;
+      width: 100%;
+    }
+  }
+
+  &__items {
+    display: flex;
+    a {
+      padding: 15px 10px;
+      font-weight: bold;
+      width: 120px;
+      &:hover {
+        text-decoration: underline;
+        color: $primary-color;
+      }
+    }
+  }
+
+  &__dropdown {
+    width: 200px;
+    span {
+      &:hover {
+        color: #fff;
+      }
+    }
+  }
+
+  &__buttons button {
+    &:first-child {
+      margin-right: 1em;
+    }
+  }
+}
+
+@media screen and (max-width: 1025px) {
+  .site-navbar {
+    &__items {
+      display: none;
+    }
+  }
+}
