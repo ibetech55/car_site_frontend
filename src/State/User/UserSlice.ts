@@ -8,6 +8,8 @@ import {
   getByAccessCodeToken,
   getLoggedUser,
   getUserById,
+  updateDealership,
+  updatePrivateUser,
 } from "./UserActions";
 import { CREATED_USER_TOKEN } from "../../Configs/Constants/User";
 import { GetUserDto } from "../../Data/UserDtos/GetUserDto";
@@ -72,8 +74,8 @@ const userSlice = createSlice({
       .addCase(
         getUserById.fulfilled,
         (state, action: PayloadAction<GetUserDto>) => {
-          state.loading = false;
           state.user = action.payload;
+          state.loading = false;
         }
       )
       .addCase(getUserById.rejected, (state) => {
@@ -121,7 +123,19 @@ const userSlice = createSlice({
       )
       .addCase(getLoggedUser.rejected, (state, action) => {
         state.errorRegisterUser = action.payload as string;
-      });
+      })
+      .addCase(updatePrivateUser.pending, (state) => {
+        state.loading = true;
+      })
+      .addCase(updatePrivateUser.rejected, (state, action) => {
+        state.errorRegisterUser = action.payload as string;
+      })
+      .addCase(updateDealership.pending, (state) => {
+        state.loading = true;
+      })
+      .addCase(updateDealership.rejected, (state, action) => {
+        state.errorRegisterUser = action.payload as string;
+      })
   },
 });
 export const { clearErrorRegisterUser, clearAccessCodeError } =
