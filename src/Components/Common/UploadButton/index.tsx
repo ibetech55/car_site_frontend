@@ -7,9 +7,14 @@ import { Typography } from "antd";
 interface IProps {
   title: string;
   onFileChange: ChangeEventHandler;
+  showImageName?: boolean;
 }
 
-const UploadButton: React.FC<IProps> = ({ title, onFileChange }) => {
+const UploadButton: React.FC<IProps> = ({
+  title,
+  onFileChange,
+  showImageName = true,
+}) => {
   const fileInputRef = useRef<HTMLInputElement | null>(null);
   const [fileName, setFileName] = useState("");
 
@@ -19,7 +24,6 @@ const UploadButton: React.FC<IProps> = ({ title, onFileChange }) => {
   const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     onFileChange(e);
     const file = fileInputRef.current?.files?.[0];
-    setFileName(file?.name as string);
     setFileName(file?.name as string);
   };
   return (
@@ -37,7 +41,7 @@ const UploadButton: React.FC<IProps> = ({ title, onFileChange }) => {
         onClick={handleFileOpen}
         icon={<UploadOutlined />}
       />
-      <Typography>{fileName}</Typography>
+      {showImageName && <Typography>{fileName}</Typography>}
     </div>
   );
 };

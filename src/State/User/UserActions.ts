@@ -5,6 +5,7 @@ import { VITE_USER_API_URL } from "../../Configs/EnviromentVariables";
 import { GetUserDto } from "../../Data/UserDtos/GetUserDto";
 import { GetByAccessCodeTokenDto } from "../../Data/UserDtos/GetByAccessCodeTokenDto";
 import { PutConfirmAccessCodeDto } from "../../Data/UserDtos/ConfirmAccessCodeDtos";
+import { GetLoggedUserDto } from "../../Data/UserDtos/GetLoggedUserDto";
 
 export const createPrivateUser = createAsyncThunk(
   "user/createPrivateUser",
@@ -90,6 +91,23 @@ export const confirmAccessCode = createAsyncThunk(
           accessCode: values.accessCode,
           accessCodeToken: values.accessCodeToken,
         }
+      );
+      return data;
+    } catch (error: any) {
+      throw rejectWithValue(error.response.data.message) as unknown as string;
+    }
+  }
+);
+
+export const getLoggedUser = createAsyncThunk(
+  "user/getLoggedUser",
+  async (
+    id: string,
+    { rejectWithValue }
+  ): Promise<GetLoggedUserDto> => {
+    try {
+      const { data } = await axios.get(
+        `${VITE_USER_API_URL}/user/loggedUser/${id}`
       );
       return data;
     } catch (error: any) {

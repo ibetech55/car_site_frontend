@@ -1,0 +1,13 @@
+.site-template {
+    &__navbar {
+        box-shadow: $box-shadow;
+        &-inner{
+            width: 95%;
+            margin: 0 auto;
+        }
+    }
+    &__content {
+        width: 95%;
+        margin: 2rem auto;
+    }
+}

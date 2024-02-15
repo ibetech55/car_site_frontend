@@ -13,6 +13,7 @@ interface IProps {
   block?: boolean;
   htmlType?: "button" | "submit" | "reset" | undefined;
   onClick?: React.MouseEventHandler<HTMLElement> | undefined;
+  danger?: boolean;
 }
 const DefaultButton: React.FC<IProps> = ({
   title,
@@ -24,14 +25,18 @@ const DefaultButton: React.FC<IProps> = ({
   block,
   htmlType,
   onClick,
+  danger = false,
 }) => {
+  const handleClassName = () => {
+    if (!outline && !danger) return "default-button default-button__default";
+    if (danger && outline)
+      return "default-button default-button__danger-outline";
+    if (danger) return "default-button default-button__danger";
+    else return "default-button default-button__outline-button";
+  };
   return (
     <Button
-      className={
-        !outline
-          ? "default-button default-button__default"
-          : "default-button default-button__outline-button"
-      }
+      className={handleClassName()}
       id={id}
       type={type}
       size={size}
@@ -40,6 +45,7 @@ const DefaultButton: React.FC<IProps> = ({
       block={block}
       htmlType={htmlType}
       onClick={onClick}
+      danger={danger}
       style={{
         boxShadow:
           "rgba(60, 64, 67, 0.3) 0px 1px 2px 0px, rgba(60, 64, 67, 0.15) 0px 2px 6px 2px",

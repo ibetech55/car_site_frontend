@@ -5,6 +5,7 @@
     &:hover {
         background-color: #fff !important;
         color: $primary-color !important;
+        border: 1px solid $primary-color;
       }
   }
 
@@ -13,6 +14,20 @@
     &:hover {
       background-color: $primary-color !important;
       color: #fff !important;
+    }
+  }
+
+  &__danger-outline {
+    &:hover {
+      background-color: red !important;
+      color: #fff !important;
+    }
+  }
+
+  &__danger {
+    &:hover {
+      background-color: #fff !important;
+      color: red !important;
     }
   }
 }

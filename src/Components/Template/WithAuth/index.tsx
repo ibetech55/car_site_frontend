@@ -9,22 +9,25 @@ import {
   ACCOUNT_ACTIVATED,
   ACCOUNT_CREATED,
 } from "../../../Configs/Constants/AccountStatus";
+import { GetLoggedUserDto } from "../../../Data/UserDtos/GetLoggedUserDto";
 
-interface WrappedComponentProps {}
+interface WrappedComponentProps {
+  loggedUser?:GetLoggedUserDto
+}
 
-const WithAuth = <P extends WrappedComponentProps>(
-  WrappedComponent: React.ComponentType<P>
+const WithAuth = (
+  WrappedComponent: React.ComponentType<WrappedComponentProps>
 ) => {
-  const WithAuthentication: React.FC<P> = (props) => {
+  const WithAuthentication: React.FC = () => {
     const navigate = useNavigate();
-    const { handleGetUserById, userData } = useUser();
+    const { handleGetLoggedUser, loggedUser } = useUser();
     useEffect(() => {
       try {
         const loginToken = getCookie(LOGIN_TOKEN);
         if (loginToken) {
           const data = decodeToken<{ user_id: string }>(loginToken);
           if (data && data.user_id) {
-            handleGetUserById(data.user_id);
+            handleGetLoggedUser(data.user_id);
           } else {
             removeCookie(LOGIN_TOKEN);
             navigate("/");
@@ -38,9 +41,9 @@ const WithAuth = <P extends WrappedComponentProps>(
       }
     }, []);
 
-    if (userData.accountStatus === ACCOUNT_ACTIVATED && userData.active) {
-      return <WrappedComponent {...(props as P)} />;
-    } else if (userData.accountStatus === ACCOUNT_CREATED && !userData.active) {
+    if (loggedUser.accountStatus === ACCOUNT_ACTIVATED && loggedUser.active) {
+      return <WrappedComponent />;
+    } else if (loggedUser.accountStatus === ACCOUNT_CREATED && !loggedUser.active) {
       return <Navigate to="/account_created" />;
     }
   };
