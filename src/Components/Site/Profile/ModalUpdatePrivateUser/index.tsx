@@ -40,7 +40,7 @@ const ModalUpdatePrivateUser: React.FC<IProps> = ({
   }, []);
 
   return (
-    <Form layout="vertical" onFinish={() => {}}>
+    <Form layout="vertical">
       <Row gutter={[8, 8]} className="row-gutter-bottom">
         <Col {...cols2}>
           <FormInput
