@@ -9,6 +9,7 @@ import {
   getLoggedUser,
   getUserById,
   updateDealership,
+  updatePassword,
   updatePrivateUser,
 } from "../../State/User/UserActions";
 import { CreatePrivateUserFormDto } from "../../Data/UserDtos/CreatePrivateUserDto";
@@ -27,6 +28,7 @@ import {
   UpdatePrivateUserDto,
   UpdatePrivateUserFormDto,
 } from "../../Data/UserDtos/UpdateUserDto";
+import { ChangePasswordDto, ChangePasswordFormDto } from "../../Data/UserDtos/PasswordDtos";
 
 const useUser = () => {
   const userData = useSelector((state: RootState) => state.user);
@@ -161,6 +163,18 @@ const useUser = () => {
     await dispatch(getUserById(userData.user.id))
   };
 
+  const handleUpdatePassword = async (
+    values: ChangePasswordFormDto
+  ) => {
+    const requestData: ChangePasswordDto = {
+      id: userData.user.id,
+      currentPassword: values.currentPassword,
+      newPassword: values.newPassword
+    };
+    await dispatch(updatePassword(requestData)).unwrap();
+    await dispatch(getUserById(userData.user.id))
+  };
+
   useClearError({
     action: () => dispatch(clearErrorRegisterUser()),
     errorString: [userData.errorRegisterUser],
@@ -170,7 +184,7 @@ const useUser = () => {
     action: () => dispatch(clearAccessCodeError()),
     errorString: [userData.confirmAccessCodeError],
   });
-
+  
   return {
     loading: userData.loading,
     handleCreatePrivateUser,
@@ -188,7 +202,8 @@ const useUser = () => {
     handleGetLoggedUser,
     loggedUser: userData.loggedUser,
     handleUpdatePrivateUser,
-    handleUpdateDealership
+    handleUpdateDealership,
+    handleUpdatePassword
   };
 };
 

@@ -24,6 +24,9 @@ import {
   IErrorsUpdateDealership,
   formValidationDealership,
 } from "../../Components/Site/Profile/ModalUpdateDealership/FormValidationDealership";
+import ChangePasswordForm from "../../Components/Site/Profile/ChangePasswordForm";
+import { ChangePasswordFormDto, IErrorsPasswordForm } from "../../Data/UserDtos/PasswordDtos";
+import { formValidationPassword } from "../../Components/Site/Profile/ChangePasswordForm/FormValidationPassword";
 
 const initFormDealership: UpdateDealershipFormDto = {
   contactName: "",
@@ -46,12 +49,22 @@ const initFormPrivateUser: UpdatePrivateUserFormDto = {
   dateOfBirth: "",
 };
 
+const initPasswordForm: ChangePasswordFormDto = {
+  currentPassword: "",
+  newPassword: "",
+  confirmPassword: ""
+}
+
 const ProfilePage: React.FC = () => {
   const [openModalUpdateUser, setOpenModalUpdateUser] = useState(false);
+  const [openPasswordModal, setPassordModal] = useState(false);
+  const [formPassword, setFormPassword] = useState<ChangePasswordFormDto>(initPasswordForm)
   const [errorsPrivateUser, setErrorsPrivateUser] =
     useState<IErrorsUpdatePrivateUser>({});
   const [errorsDealership, setErrorsDealership] =
     useState<IErrorsUpdateDealership>({});
+    const [errorsPasswordForm, setErrorsPasswordForm] =
+    useState<IErrorsPasswordForm>({});
 
   const [formDealership, setFormDealership] =
     useState<UpdateDealershipFormDto>(initFormDealership);
@@ -63,7 +76,8 @@ const ProfilePage: React.FC = () => {
     userData,
     handleUpdatePrivateUser,
     loading,
-    handleUpdateDealership
+    handleUpdateDealership,
+    handleUpdatePassword
   } = useUser();
 
   const handleSubmitPUser = () => {
@@ -91,6 +105,17 @@ const ProfilePage: React.FC = () => {
     }
   };
 
+  const handleSubmitPass = () => {
+    setErrorsPasswordForm({});
+    const { hasErros, formErros } = formValidationPassword(formPassword);
+    if (!hasErros) {
+      handleUpdatePassword(formPassword);
+      setPassordModal(false);
+    } else {
+      setErrorsPasswordForm(formErros);
+    }
+  }
+
   useClearError({
     action: () => setErrorsPrivateUser({}),
     errorObject: errorsPrivateUser,
@@ -98,6 +123,10 @@ const ProfilePage: React.FC = () => {
   useClearError({
     action: () => setErrorsDealership({}),
     errorObject: errorsDealership,
+  });
+  useClearError({
+    action: () => setErrorsPasswordForm({}),
+    errorObject: errorsPasswordForm,
   });
 
   useEffect(() => {
@@ -149,7 +178,7 @@ const ProfilePage: React.FC = () => {
           />
           <DefaultButton
             title="Change Password"
-            onClick={() => setOpenModalUpdateUser(true)}
+            onClick={() => setPassordModal(true)}
           />
         </div>
       </div>
@@ -209,6 +238,9 @@ const ProfilePage: React.FC = () => {
           />
         </SiteModal>
       )}
+      <SiteModal open={openPasswordModal} onCancel={() => setPassordModal(false)} title="Change Password" handleConfirm={handleSubmitPass}>
+        <ChangePasswordForm form={formPassword} setForm={setFormPassword} errors={errorsPasswordForm} />
+      </SiteModal>
     </>
   );
 };

@@ -6,7 +6,11 @@ import { GetUserDto } from "../../Data/UserDtos/GetUserDto";
 import { GetByAccessCodeTokenDto } from "../../Data/UserDtos/GetByAccessCodeTokenDto";
 import { PutConfirmAccessCodeDto } from "../../Data/UserDtos/ConfirmAccessCodeDtos";
 import { GetLoggedUserDto } from "../../Data/UserDtos/GetLoggedUserDto";
-import { UpdateDealershipDto, UpdatePrivateUserDto } from "../../Data/UserDtos/UpdateUserDto";
+import {
+  UpdateDealershipDto,
+  UpdatePrivateUserDto,
+} from "../../Data/UserDtos/UpdateUserDto";
+import { ChangePasswordDto } from "../../Data/UserDtos/PasswordDtos";
 
 export const createPrivateUser = createAsyncThunk(
   "user/createPrivateUser",
@@ -102,10 +106,7 @@ export const confirmAccessCode = createAsyncThunk(
 
 export const getLoggedUser = createAsyncThunk(
   "user/getLoggedUser",
-  async (
-    id: string,
-    { rejectWithValue }
-  ): Promise<GetLoggedUserDto> => {
+  async (id: string, { rejectWithValue }): Promise<GetLoggedUserDto> => {
     try {
       const { data } = await axios.get(
         `${VITE_USER_API_URL}/user/loggedUser/${id}`
@@ -125,7 +126,8 @@ export const updatePrivateUser = createAsyncThunk(
   ): Promise<boolean> => {
     try {
       const { data } = await axios.put(
-        `${VITE_USER_API_URL}/privateUser/${values.privateUser.id}`, values
+        `${VITE_USER_API_URL}/privateUser/${values.privateUser.id}`,
+        values
       );
       return data;
     } catch (error: any) {
@@ -142,7 +144,23 @@ export const updateDealership = createAsyncThunk(
   ): Promise<boolean> => {
     try {
       const { data } = await axios.put(
-        `${VITE_USER_API_URL}/dealership/${values.dealership.id}`, values
+        `${VITE_USER_API_URL}/dealership/${values.dealership.id}`,
+        values
+      );
+      return data;
+    } catch (error: any) {
+      throw rejectWithValue(error.response.data.message) as unknown as string;
+    }
+  }
+);
+
+export const updatePassword = createAsyncThunk(
+  "user/updatePassword",
+  async (values: ChangePasswordDto, { rejectWithValue }): Promise<boolean> => {
+    try {
+      const { data } = await axios.put(
+        `${VITE_USER_API_URL}/user/changeUserPassword/${values.id}`,
+        { password: values.currentPassword, newPassword: values.newPassword }
       );
       return data;
     } catch (error: any) {

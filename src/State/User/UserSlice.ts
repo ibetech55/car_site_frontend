@@ -9,6 +9,7 @@ import {
   getLoggedUser,
   getUserById,
   updateDealership,
+  updatePassword,
   updatePrivateUser,
 } from "./UserActions";
 import { CREATED_USER_TOKEN } from "../../Configs/Constants/User";
@@ -135,6 +136,13 @@ const userSlice = createSlice({
       })
       .addCase(updateDealership.rejected, (state, action) => {
         state.errorRegisterUser = action.payload as string;
+      })
+      .addCase(updatePassword.pending, (state) => {
+        state.loading = true;
+      })
+      .addCase(updatePassword.rejected, (state, action) => {
+        state.errorRegisterUser = action.payload as string;
+        state.loading = false;
       })
   },
 });
