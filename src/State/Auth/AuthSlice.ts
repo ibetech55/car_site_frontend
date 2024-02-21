@@ -2,8 +2,6 @@ import { PayloadAction, createSlice } from "@reduxjs/toolkit";
 import { initialState } from "./AuthState";
 import { authLogin, authLogout } from "./AuthActions";
 import { LoginResponseDto } from "../../Data/AuthDtos/loginDtos";
-import cookie from 'js-cookie';
-import { LOGIN_TOKEN } from "../../Configs/Constants/Tokens";
 
 const authSlice = createSlice({
   name: "auth",
@@ -24,7 +22,6 @@ const authSlice = createSlice({
           state.auth = true;
           state.loginToken = action.payload.login_token;
           state.loading = false;
-          cookie.set(LOGIN_TOKEN, action.payload.login_token)
         }
       )
       .addCase(authLogin.rejected, (state, action) => {
@@ -32,7 +29,6 @@ const authSlice = createSlice({
       })
       .addCase(authLogout.pending, (state) => {
         state.loading = true;
-        cookie.remove(LOGIN_TOKEN)
       })
       .addCase(
         authLogout.fulfilled,
