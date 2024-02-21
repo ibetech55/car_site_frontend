@@ -2,7 +2,7 @@ import { PayloadAction, createSlice } from "@reduxjs/toolkit";
 import { initialState } from "./AuthState";
 import { authLogin, authLogout } from "./AuthActions";
 import { LoginResponseDto } from "../../Data/AuthDtos/loginDtos";
-import cookie from 'js-cookie';
+import cookie from "js-cookie";
 import { LOGIN_TOKEN } from "../../Configs/Constants/Tokens";
 
 const authSlice = createSlice({
@@ -10,8 +10,8 @@ const authSlice = createSlice({
   initialState,
   reducers: {
     clearLoginError: (state) => {
-      state.loginError = ''
-    }
+      state.loginError = "";
+    },
   },
   extraReducers(builder) {
     builder
@@ -31,19 +31,16 @@ const authSlice = createSlice({
       })
       .addCase(authLogout.pending, (state) => {
         state.loading = true;
-        cookie.remove(LOGIN_TOKEN);
-        cookie.remove('auth_token');
       })
-      .addCase(
-        authLogout.fulfilled,
-        (state) => {
-          state.auth = false;
-          state.loading = false;
-        }
-      )
+      .addCase(authLogout.fulfilled, (state) => {
+        state.auth = false;
+        cookie.remove(LOGIN_TOKEN);
+        cookie.remove("auth_token");
+        state.loading = false;
+      })
       .addCase(authLogout.rejected, (state, action) => {
         state.loginError = action.payload as string;
-      })
+      });
   },
 });
 

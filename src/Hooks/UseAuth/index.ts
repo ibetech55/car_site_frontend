@@ -5,7 +5,7 @@ import { authLogin, authLogout } from "../../State/Auth/AuthActions";
 import { LoginFormDto } from "../../Data/AuthDtos/loginDtos";
 import { clearLoginError } from "../../State/Auth/AuthSlice";
 import useClearError from "../../Utils/UseClearError";
-// import Cookies from "js-cookie";
+import Cookies from "js-cookie";
 import { getUserById } from "../../State/User/UserActions";
 import { jwtDecode } from "jwt-decode";
 import {
@@ -20,11 +20,11 @@ const useAuth = () => {
   const dispatch = useDispatch<AppDispatch>();
 
   const handleLogin = async (values: LoginFormDto) => {
-    const authData = await dispatch(authLogin(values)).unwrap();
-    // const loginToken = Cookies.get("login_token");
-    if (authData.login_token) {
+    await dispatch(authLogin(values));
+    const loginToken = Cookies.get("login_token");
+    if (loginToken) {
       // eslint-disable-next-line @typescript-eslint/no-explicit-any
-      const data = jwtDecode(authData.login_token) as any;
+      const data = jwtDecode(loginToken) as any;
 
       if (data) {
         const userData = await dispatch(getUserById(data.user_id)).unwrap();
