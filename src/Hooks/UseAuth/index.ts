@@ -39,7 +39,6 @@ const useAuth = () => {
 
   const handleLogout = async () => {
     await dispatch(authLogout());
-    window.location.href = "/"
   };
   useClearError({
     errorString: [authData.loginError],
