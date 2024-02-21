@@ -24,7 +24,6 @@ const authSlice = createSlice({
           state.auth = true;
           state.loginToken = action.payload.login_token;
           state.loading = false;
-          cookie.set(LOGIN_TOKEN, action.payload.login_token)
         }
       )
       .addCase(authLogin.rejected, (state, action) => {
@@ -32,8 +31,6 @@ const authSlice = createSlice({
       })
       .addCase(authLogout.pending, (state) => {
         state.loading = true;
-        cookie.remove(LOGIN_TOKEN);
-        cookie.remove('auth_token');
       })
       .addCase(
         authLogout.fulfilled,
