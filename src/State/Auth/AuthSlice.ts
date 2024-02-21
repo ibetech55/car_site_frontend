@@ -32,7 +32,8 @@ const authSlice = createSlice({
       })
       .addCase(authLogout.pending, (state) => {
         state.loading = true;
-        cookie.remove(LOGIN_TOKEN)
+        cookie.remove(LOGIN_TOKEN);
+        cookie.remove('auth_token');
       })
       .addCase(
         authLogout.fulfilled,
