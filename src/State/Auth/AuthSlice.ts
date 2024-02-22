@@ -38,7 +38,7 @@ const authSlice = createSlice({
         cookie.remove(LOGIN_TOKEN);
         cookie.remove("auth_token");
         state.loading = false;
-        window.location.href = "/"
+        // window.location.href = "/"
       })
       .addCase(authLogout.rejected, (state, action) => {
         state.loginError = action.payload as string;
