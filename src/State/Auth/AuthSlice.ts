@@ -2,8 +2,8 @@ import { PayloadAction, createSlice } from "@reduxjs/toolkit";
 import { initialState } from "./AuthState";
 import { authLogin, authLogout } from "./AuthActions";
 import { LoginResponseDto } from "../../Data/AuthDtos/loginDtos";
-// import cookie from "js-cookie";
-// import { LOGIN_TOKEN } from "../../Configs/Constants/Tokens";
+import cookie from "js-cookie";
+import { LOGIN_TOKEN } from "../../Configs/Constants/Tokens";
 
 const authSlice = createSlice({
   name: "auth",
@@ -35,8 +35,8 @@ const authSlice = createSlice({
       })
       .addCase(authLogout.fulfilled, (state) => {
         state.auth = false;
-        // cookie.remove(LOGIN_TOKEN);
-        // cookie.remove("auth_token");
+        cookie.remove(LOGIN_TOKEN);
+        cookie.remove("auth_token");
         state.loading = false;
         window.location.href = "/"
       })
