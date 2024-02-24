@@ -1,6 +1,12 @@
 .site-template {
     &__navbar {
         box-shadow: $box-shadow;
+        position: sticky;
+        width: 100%;
+        top: 0;
+        left: 0;
+        z-index: 200;
+        background-color: #fff;
         &-inner{
             width: 95%;
             margin: 0 auto;
@@ -8,6 +14,6 @@
     }
     &__content {
         width: 95%;
-        margin: 2rem auto;
+        margin: 3rem auto;
     }
 }

@@ -1,7 +1,6 @@
 .profile-details {
   box-shadow: $box-shadow;
-  padding: 1rem;
-  border-radius: 5px;
+  border-radius: 0;
   &__info {
     display: flex;
   }
@@ -26,7 +25,7 @@
   }
   &__user-data {
     flex: 2;
-    height: 200px;
+    min-height: 200px;
     &-text {
       line-height: 3rem;
       span {
@@ -57,6 +56,16 @@
       }
       button {
         width: 100%;
+      }
+    }
+  }
+}
+
+@media screen and (max-width: 475px) {
+  .profile-details {
+    &__user-data {
+      &-text {
+        line-height: 2rem;
       }
     }
   }

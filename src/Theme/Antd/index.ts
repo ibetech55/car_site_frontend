@@ -6,19 +6,16 @@ export const theme: ConfigProviderProps = {
       colorPrimary: primaryColor,
     },
     components: {
-      Form: {
-        labelColor: "#555",
-        verticalLabelPadding: 0,
-        itemMarginBottom: 10,
-      },
       Dropdown: {
         controlItemBgHover: primaryColor,
+        borderRadiusLG: 0,
       },
       Modal: {
         paddingMD: 0,
         paddingContentHorizontalLG: 0,
         marginSM: 0,
         marginXS: 0,
+        borderRadiusLG: 0,
       },
     },
   },
