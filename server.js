@@ -38,6 +38,6 @@ app.use("/", express.static(path.join('dist')));
 app.use("/activate_account/:account_token", express.static(path.join('dist')));
 
 let port = process.env.PORT || 3000;
-app.listen(port, CAR_SITE_FRONTEND_DOMAIN, () => console.log(`%cListening to Port: ${process.env.CAR_SITE_FRONTEND_URL}`, 'color: blue;'));
+app.listen(port, process.env.CAR_SITE_FRONTEND_DOMAIN, () => console.log(`%cListening to Port: ${process.env.CAR_SITE_FRONTEND_URL}`, 'color: blue;'));
 
 
