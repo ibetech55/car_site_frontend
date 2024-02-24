@@ -1,0 +1,22 @@
+.dashboard-search {
+    position: relative;
+    box-shadow: $box-shadow;
+    border-radius: 0 !important;
+    &__title {
+      text-align: center;
+      font-size: 26px !important;
+    }
+  
+    &__select {
+      width: 100%;
+    }
+    &__button {
+      display: flex;
+      button {
+        &:first-child {
+          margin-right: 5px;
+        }
+      }
+    }
+  }
+  

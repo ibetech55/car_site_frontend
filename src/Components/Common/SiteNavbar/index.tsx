@@ -27,9 +27,12 @@ const SiteNavbar = () => {
   return (
     <div className="site-navbar-container">
       <nav className="site-navbar">
-        <div className="site-navbar__logo">
-          <img src="./assets/logo.png" alt="logo" />
-        </div>
+        <Link to="/">
+          <div className="site-navbar__logo">
+            <img src="./assets/logo.png" alt="logo" />
+          </div>
+        </Link>
+
         <div className="site-navbar__items">
           <Link to="#">
             <Typography>Cars for Sale</Typography>

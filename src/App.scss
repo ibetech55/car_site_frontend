@@ -21,8 +21,6 @@ a:hover {
   text-decoration: underline !important;
 }
 
-
-
 label {
   font-weight: bold;
   color: $gray-color;
@@ -35,7 +33,17 @@ h1 {
 .row-gutter-bottom {
   margin-bottom: 1rem;
 }
+.ant-dropdown-menu-item {
+  &:hover {
+    span {
+      color: #fff !important;
+    }
+  }
+}
 
+.ant-modal-close {
+  top: 12px !important;
+}
 // Pages
 @import "./Pages/Home/HomePage";
 @import "./Pages/Options";
@@ -44,6 +52,7 @@ h1 {
 @import "./Pages/ActivateAccount";
 @import "./Pages/AccountCreated";
 @import "./Pages/Profile";
+@import "./Pages/Dashboard";
 
 // Components Site
 @import "./Components/Site/Home/HomeHeader/HomeHeader";
@@ -56,6 +65,7 @@ h1 {
 @import "./Components/Site/Profile/ProfileDetails";
 @import "./Components/Site/Profile/ProfileItem";
 @import "./Components/Site/Profile/UserDetails";
+@import "./Components/Site/Dashboard/DashboardSearch";
 
 // Components Common
 @import "./Components/Common/Navbar/navbar";

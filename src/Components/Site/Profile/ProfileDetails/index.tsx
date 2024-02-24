@@ -1,6 +1,6 @@
 import { useState } from "react";
 import UploadButton from "../../../Common/UploadButton";
-import { Typography } from "antd";
+import { Card, Typography } from "antd";
 import DefaultButton from "../../../Common/DefaultButton";
 import { DeleteOutlined } from "@ant-design/icons";
 import {
@@ -56,7 +56,7 @@ const ProfileDetails: React.FC<IProps> = ({
   };
 
   return (
-    <div className="profile-details">
+    <Card className="profile-details">
       <div className="profile-details__info">
         <div className="profile-details__image">
           <div className="profile-details__image-box">
@@ -128,7 +128,7 @@ const ProfileDetails: React.FC<IProps> = ({
           </Typography>
         </div>
       </div>
-    </div>
+    </Card>
   );
 };
 
