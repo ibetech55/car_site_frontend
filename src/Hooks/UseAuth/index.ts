@@ -20,7 +20,7 @@ const useAuth = () => {
   const dispatch = useDispatch<AppDispatch>();
 
   const handleLogin = async (values: LoginFormDto) => {
-    await dispatch(authLogin(values));
+    await dispatch(authLogin(values)).unwrap();
     const loginToken = Cookies.get("login_token");
     if (loginToken) {
       // eslint-disable-next-line @typescript-eslint/no-explicit-any
