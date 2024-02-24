@@ -12,7 +12,7 @@ app.use(history());
 
 app.use(
   cors({
-    origin: `${process.env.PUBLIC_URL}/*`,
+    origin: process.env.API_URL_PREFIX,
     credentials: true,
   })
 );
@@ -32,7 +32,7 @@ app.use((req, res, next) => {
 
   res.setHeader(
     "Access-Control-Allow-Origin",
-    `${process.env.API_URL_PREFIX}/*`
+    `${process.env.API_URL_PREFIX}`
   );
   res.setHeader(
     "Access-Control-Allow-Methods",
