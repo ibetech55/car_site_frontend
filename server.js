@@ -24,7 +24,7 @@ app.use((req, res, next) => {
         "Content-Type, Authorization"
       );
 
-      res.setHeader("Access-Control-Allow-Origin", `${process.env.PUBLIC_URL}/*`);
+      res.setHeader("Access-Control-Allow-Origin", `${process.env.API_URL_PREFIX}/*`);
       res.setHeader(
         "Access-Control-Allow-Methods",
         "GET, POST, PUT, DELETE, PATCH"
@@ -38,6 +38,6 @@ app.use("/", express.static(path.join('dist')));
 app.use("/activate_account/:account_token", express.static(path.join('dist')));
 
 let port = process.env.PORT || 3000;
-app.listen(port, () => console.log(`%cListening to Port: ${process.env.PUBLIC_URL}`, 'color: blue;'));
+app.listen(port, CAR_SITE_FRONTEND_DOMAIN, () => console.log(`%cListening to Port: ${process.env.CAR_SITE_FRONTEND_URL}`, 'color: blue;'));
 
 
