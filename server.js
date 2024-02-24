@@ -16,6 +16,11 @@ app.use(
     credentials: true,
   })
 );
+
+
+app.use("/", express.static(path.join("dist")));
+app.use("/activate_account/:account_token", express.static(path.join("dist")));
+
 app.use((req, res, next) => {
   // const origin = origins.includes(req.header('origin'))
   // ? req.headers.origin
@@ -35,9 +40,6 @@ app.use((req, res, next) => {
   );
   next();
 });
-
-app.use("/", express.static(path.join("dist")));
-app.use("/activate_account/:account_token", express.static(path.join("dist")));
 
 let port = process.env.PORT || 3000;
 
