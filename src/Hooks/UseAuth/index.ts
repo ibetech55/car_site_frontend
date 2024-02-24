@@ -12,10 +12,10 @@ import {
   ACCOUNT_ACTIVATED,
   ACCOUNT_CREATED,
 } from "../../Configs/Constants/AccountStatus";
-import { useNavigate } from "react-router";
+// import { useNavigate } from "react-router";
 const useAuth = () => {
   const authData = useSelector((state: RootState) => state.auth);
-  const navigate = useNavigate();
+  // const navigate = useNavigate();
 
   const dispatch = useDispatch<AppDispatch>();
 
@@ -29,7 +29,7 @@ const useAuth = () => {
       if (data) {
         const userData = await dispatch(getUserById(data.user_id)).unwrap();
         if (userData.accountStatus === ACCOUNT_ACTIVATED) {
-          navigate("/")
+          window.location.href = "/"
         } else if (userData.accountStatus === ACCOUNT_CREATED) {
           window.location.href = "/account_created"
         }
