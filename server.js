@@ -3,45 +3,14 @@ import dotenv from "dotenv";
 dotenv.config({ path: "./.env" });
 import express from "express";
 import path from "path";
-import history from "connect-history-api-fallback";
-import cors from "cors";
 
 const app = express();
-app.use(history());
-// const origins = [process.env.VITE_BRAND_API_URL, process.env.VITE_AUTH_API_URL, process.env.VITE_USER_API_URL]
-const origin = "https://api.ibetech.shop/(auth|brand|user)_api/auth/login"
-app.use(
-  cors({
-    origin: origin,
-    credentials: true,
-  })
-);
 
 
 app.use("/", express.static(path.join("dist")));
 app.use("/activate_account/:account_token", express.static(path.join("dist")));
 
-app.use((req, res, next) => {
-  // const origin = origins.includes(req.header('origin'))
-  // ? req.headers.origin
-  // : null;
-  res.setHeader("Access-Control-Allow-Credentials", "true");
-  res.setHeader("Access-Control-Allow-Headers", "Content-Type");
-
-  res.setHeader("Access-Control-Allow-Headers", "Content-Type, Authorization");
-
-  res.setHeader(
-    "Access-Control-Allow-Origin",
-    `${origin}`
-  );
-  res.setHeader(
-    "Access-Control-Allow-Methods",
-    "GET, POST, PUT, DELETE, PATCH"
-  );
-  next();
-});
-
-let port = process.env.PORT || 3000;
+const port = process.env.PORT || 3000;
 
 if (process.env.NODE_ENV === "development") {
   app.listen(port, process.env.CAR_SITE_FRONTEND_DOMAIN, () =>
