@@ -12,7 +12,7 @@ const origins = [process.env.VITE_BRAND_API_URL, process.env.VITE_AUTH_API_URL, 
 
 app.use(
   cors({
-    origin: process.env.API_URL_PREFIX,
+    origin: origins,
     credentials: true,
   })
 );
