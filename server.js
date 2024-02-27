@@ -8,7 +8,7 @@ import cors from "cors";
 
 const app = express();
 app.use(history());
-// const origins = [process.env.VITE_BRAND_API_URL, process.env.VITE_AUTH_API_URL, process.env.VITE_USER_API_URL]
+const origins = [process.env.VITE_BRAND_API_URL, process.env.VITE_AUTH_API_URL, process.env.VITE_USER_API_URL]
 
 app.use(
   cors({
@@ -22,9 +22,9 @@ app.use("/", express.static(path.join("dist")));
 app.use("/activate_account/:account_token", express.static(path.join("dist")));
 
 app.use((req, res, next) => {
-  // const origin = origins.includes(req.header('origin'))
-  // ? req.headers.origin
-  // : null;
+  const origin = origins.includes(req.header('origin'))
+  ? req.headers.origin
+  : null;
   res.setHeader("Access-Control-Allow-Credentials", "true");
   res.setHeader("Access-Control-Allow-Headers", "Content-Type");
 
@@ -32,7 +32,7 @@ app.use((req, res, next) => {
 
   res.setHeader(
     "Access-Control-Allow-Origin",
-    `${process.env.API_URL_PREFIX}`
+    `${origin}`
   );
   res.setHeader(
     "Access-Control-Allow-Methods",
