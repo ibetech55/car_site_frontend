@@ -5,7 +5,7 @@ import { resolve } from 'path'
 export default defineConfig({
   base: process.env.CAR_SITE_FRONTEND_URL,
   server: {
-    port: 3000, // Use the same port for dev and serve
+    port: +process.env.PORT, // Use the same port for dev and serve
   },
   plugins: [react()],
   build: {
