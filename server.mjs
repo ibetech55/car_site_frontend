@@ -13,7 +13,6 @@ const origins = [
   process.env.VITE_AUTH_API_URL,
   process.env.VITE_USER_API_URL,
 ];
-
 app.use(
   cors({
     origin: origins,
@@ -43,16 +42,6 @@ app.use((req, res, next) => {
 
 let port = process.env.PORT || 3000;
 
-// if (process.env.NODE_ENV === "development") {
-//   app.listen(port, process.env.CAR_SITE_FRONTEND_DOMAIN, () =>
-//     console.log(`Listening to Port: ${process.env.CAR_SITE_FRONTEND_URL}`)
-//   );
-// } else {
-//   app.listen(port, () =>
-//     console.log(`Listening to Port: ${process.env.CAR_SITE_FRONTEND_URL}`)
-//   );
-// }
-
 app.listen(port, () =>
-  console.log(`Listening to Port: ${process.env.CAR_SITE_FRONTEND_URL}`)
+  console.log(`Listening to Port: ${process.env.PORT}`)
 );
