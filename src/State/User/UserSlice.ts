@@ -1,6 +1,7 @@
 import { PayloadAction, createSlice } from "@reduxjs/toolkit";
 import { accessCodeTokenResponse, initUser, initialState } from "./UserState";
 import {
+  ICreateUserErrors,
   confirmAccessCode,
   confirmCreatedUser,
   createDealership,
@@ -23,7 +24,8 @@ const userSlice = createSlice({
   initialState,
   reducers: {
     clearErrorRegisterUser: (state) => {
-      state.errorRegisterUser = "";
+      state.errorEmail = "";
+      state.errorZipCode = ""
     },
     clearAccessCodeError: (state) => {
       state.confirmAccessCodeError = "";
@@ -38,29 +40,34 @@ const userSlice = createSlice({
         createPrivateUser.fulfilled,
         (state, action: PayloadAction<string>) => {
           state.loading = false;
-          state.errorRegisterUser = "";
+          state.errorEmail = "";
           sessionStorage.setItem(CREATED_USER_TOKEN, action.payload);
           window.location.href = "/account_created";
         }
       )
       .addCase(createPrivateUser.rejected, (state, action) => {
-        state.errorRegisterUser = action.payload as string;
+        const data = action.payload as ICreateUserErrors;
+        state.errorEmail = data.emailError;
+        state.errorZipCode = data.zipCodeError
       })
       .addCase(createDealership.pending, (state) => {
         state.loading = true;
-        state.errorRegisterUser = "";
+        state.errorEmail = "";
+        state.errorZipCode = "";
       })
       .addCase(
         createDealership.fulfilled,
         (state, action: PayloadAction<string>) => {
           state.loading = false;
-          state.errorRegisterUser = "";
+          state.errorEmail = "";
           sessionStorage.setItem(CREATED_USER_TOKEN, action.payload);
           window.location.href = "/account_created";
         }
       )
       .addCase(createDealership.rejected, (state, action) => {
-        state.errorRegisterUser = action.payload as string;
+        const data = action.payload as ICreateUserErrors;
+        state.errorEmail = data.emailError;
+        state.errorZipCode = data.zipCodeError
       })
       .addCase(
         confirmCreatedUser.fulfilled,
@@ -123,25 +130,25 @@ const userSlice = createSlice({
         }
       )
       .addCase(getLoggedUser.rejected, (state, action) => {
-        state.errorRegisterUser = action.payload as string;
+        state.errorEmail = action.payload as string;
       })
       .addCase(updatePrivateUser.pending, (state) => {
         state.loading = true;
       })
       .addCase(updatePrivateUser.rejected, (state, action) => {
-        state.errorRegisterUser = action.payload as string;
+        state.errorEmail = action.payload as string;
       })
       .addCase(updateDealership.pending, (state) => {
         state.loading = true;
       })
       .addCase(updateDealership.rejected, (state, action) => {
-        state.errorRegisterUser = action.payload as string;
+        state.errorEmail = action.payload as string;
       })
       .addCase(updatePassword.pending, (state) => {
         state.loading = true;
       })
       .addCase(updatePassword.rejected, (state, action) => {
-        state.errorRegisterUser = action.payload as string;
+        state.errorEmail = action.payload as string;
         state.loading = false;
       })
   },

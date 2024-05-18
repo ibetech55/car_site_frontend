@@ -46,7 +46,8 @@ export const initGetLoggedUser:GetLoggedUserDto = {
 
 export interface UserState {
   loading: boolean;
-  errorRegisterUser: string;
+  errorZipCode:string;
+  errorEmail: string;
   createdUserToken: string;
   confirmCreatedUser: boolean;
   user: GetUserDto;
@@ -56,16 +57,15 @@ export interface UserState {
   loggedUser:GetLoggedUserDto;
 }
 
-
-
 export const initialState: UserState = {
   loading: false,
-  errorRegisterUser: "",
+  errorEmail: "",
   createdUserToken: "",
   confirmCreatedUser: false,
   user: initUser,
   accessCodeTokenResponse:accessCodeTokenResponse,
   confirmAccessCodeResponse: false,
   confirmAccessCodeError: '',
-  loggedUser: initGetLoggedUser
+  loggedUser: initGetLoggedUser,
+  errorZipCode: ''
 };

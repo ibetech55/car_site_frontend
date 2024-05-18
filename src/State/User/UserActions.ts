@@ -11,7 +11,10 @@ import {
   UpdatePrivateUserDto,
 } from "../../Data/UserDtos/UpdateUserDto";
 import { ChangePasswordDto } from "../../Data/UserDtos/PasswordDtos";
-
+export interface ICreateUserErrors {
+  emailError:string; 
+  zipCodeError:string;
+}
 export const createPrivateUser = createAsyncThunk(
   "user/createPrivateUser",
   async (formData: FormData, { rejectWithValue }): Promise<string> => {
@@ -22,7 +25,7 @@ export const createPrivateUser = createAsyncThunk(
       );
       return data;
     } catch (error: any) {
-      throw rejectWithValue(error.response.data.message) as unknown as string;
+      throw rejectWithValue(error.response.data.message);
     }
   }
 );
@@ -37,7 +40,7 @@ export const createDealership = createAsyncThunk(
       );
       return data;
     } catch (error: any) {
-      throw rejectWithValue(error.response.data.message) as unknown as string;
+      throw rejectWithValue(error.response.data.message);
     }
   }
 );

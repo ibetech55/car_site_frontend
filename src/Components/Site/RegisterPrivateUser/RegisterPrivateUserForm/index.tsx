@@ -9,6 +9,9 @@ import { formValidations } from "./FormValidations";
 import { handleFormChange } from "../../../../Utils/HandleFormChange";
 import "./index.scss";
 import useClearError from "../../../../Utils/UseClearError";
+import DropdownStates from "../../../Common/DropdownStates";
+import { ISelect } from "../../../../Data/Common/ISelect";
+import DropdownCity from "../../../Common/DropdownCity";
 
 const initForm: CreatePrivateUserFormDto = {
   firstName: "",
@@ -39,12 +42,16 @@ export interface IErrors {
 
 interface IProps {
   handleCreatePrivateUser: (values: CreatePrivateUserFormDto) => void;
-  registerUserError: string;
+  handleGetCityList:(stateCode:string) => void;
+  errorZipCode: string;
+  errorEmail: string;
 }
 
 const RegisterUserForm: React.FC<IProps> = ({
   handleCreatePrivateUser,
-  registerUserError,
+  handleGetCityList,
+  errorZipCode,
+  errorEmail
 }) => {
   const cols = { xs: 24, sm: 24, md: 6, lg: 6, xl: 6 };
   const colButton = { xs: 24, sm: 24, md: 24, lg: 24, xl: 24 };
@@ -108,7 +115,7 @@ const RegisterUserForm: React.FC<IProps> = ({
               value={form.email}
               onChange={(e) => handleFormChange(e, form, setForm)}
               required
-              error={errors.email || registerUserError}
+              error={errors.email || errorEmail}
             />
           </Col>
           <Col {...cols}>
@@ -172,27 +179,26 @@ const RegisterUserForm: React.FC<IProps> = ({
             />
           </Col>
           <Col {...cols}>
-            <FormInput
-              id="state"
-              name="state"
-              type="state"
+            <DropdownStates
               label="State"
-              value={form.state}
-              onChange={(e) => handleFormChange(e, form, setForm)}
+              showSearch
               required
-              error={errors.state}
+              value={form.state}
+              onChange={(_: unknown, option: ISelect | ISelect[]) => {
+                const val = option as ISelect;
+                setForm({ ...form, state: val.label, city: "" });
+                handleGetCityList(val.value);
+              }}
             />
           </Col>
           <Col {...cols}>
-            <FormInput
-              id="city"
-              name="city"
-              type="city"
-              label="City"
-              value={form.city}
-              onChange={(e) => handleFormChange(e, form, setForm)}
-              required
+            <DropdownCity
               error={errors.city}
+              showSearch
+              required
+              label="City"
+              onChange={(value) => setForm({ ...form, city: value })}
+              value={form.city}
             />
           </Col>
           <Col {...cols} className="row-gutter-bottom">
@@ -203,7 +209,7 @@ const RegisterUserForm: React.FC<IProps> = ({
               label="Zip Code"
               value={form.zipCode}
               onChange={(e) => handleFormChange(e, form, setForm)}
-              error={errors.zipCode}
+              error={errors.zipCode || errorZipCode}
               required
             />
           </Col>

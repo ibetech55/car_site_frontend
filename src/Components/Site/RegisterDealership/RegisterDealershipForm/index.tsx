@@ -7,6 +7,9 @@ import FormInput from "../../../Common/FormInput";
 import { formValidations } from "./FormValidations";
 import { handleFormChange } from "../../../../Utils/HandleFormChange";
 import useClearError from "../../../../Utils/UseClearError";
+import { ISelect } from "../../../../Data/Common/ISelect";
+import DropdownStates from "../../../Common/DropdownStates";
+import DropdownCity from "../../../Common/DropdownCity";
 
 const initForm: CreateDealershipFormDto = {
   contactName: "",
@@ -23,7 +26,9 @@ const initForm: CreateDealershipFormDto = {
 
 interface IProps {
   handleCreateDealership: (values: CreateDealershipFormDto) => void;
-  registerUserError: string;
+  errorZipCode: string;
+  handleGetCityList: (stateCode: string) => void;
+  errorEmail:string;
 }
 
 export interface IErrors {
@@ -39,7 +44,9 @@ export interface IErrors {
 }
 const RegisterUserForm: React.FC<IProps> = ({
   handleCreateDealership,
-  registerUserError,
+  errorEmail,
+  errorZipCode,
+  handleGetCityList,
 }) => {
   const cols = { xs: 24, sm: 24, md: 6, lg: 6, xl: 6 };
   const cols2 = { xs: 24, sm: 24, md: 6, lg: 8, xl: 8 };
@@ -47,9 +54,8 @@ const RegisterUserForm: React.FC<IProps> = ({
   const [form, setForm] = useState<CreateDealershipFormDto>(initForm);
   const [confirmPassword, setConfirmPassword] = useState("");
   const [errors, setErrors] = useState<IErrors>({});
-
   const handleSubmit = () => {
-    setErrors({})
+    setErrors({});
     const { hasErros, formErros } = formValidations(form, confirmPassword);
     if (!hasErros) {
       handleCreateDealership(form);
@@ -80,7 +86,7 @@ const RegisterUserForm: React.FC<IProps> = ({
               name="contactName"
               label="Contact Name"
               value={form.contactName}
-              onChange={(e)=>handleFormChange(e, form, setForm)}
+              onChange={(e) => handleFormChange(e, form, setForm)}
               required
               error={errors.contactName}
             />
@@ -91,7 +97,7 @@ const RegisterUserForm: React.FC<IProps> = ({
               name="dealershipName"
               label="Dealership Name"
               value={form.dealershipName}
-              onChange={(e)=>handleFormChange(e, form, setForm)}
+              onChange={(e) => handleFormChange(e, form, setForm)}
               required
               error={errors.dealershipName}
             />
@@ -102,15 +108,19 @@ const RegisterUserForm: React.FC<IProps> = ({
               name="email"
               label="E-mail"
               value={form.email}
-              onChange={(e)=>handleFormChange(e, form, setForm)}
+              onChange={(e) => handleFormChange(e, form, setForm)}
               required
-              error={errors.email || registerUserError}
+              error={errors.email || errorEmail}
             />
           </Col>
         </Row>
         <Row gutter={[8, 8]}>
           <Col {...cols}>
-            <Form.Item label="Dealership Logo" name="dealershipLogo" className="row-gutter-bottom">
+            <Form.Item
+              label="Dealership Logo"
+              name="dealershipLogo"
+              className="row-gutter-bottom"
+            >
               <UploadButton
                 title="Dealership Logo"
                 onFileChange={handleFileChange}
@@ -125,7 +135,7 @@ const RegisterUserForm: React.FC<IProps> = ({
               name="password"
               label="Password"
               value={form.password}
-              onChange={(e)=>handleFormChange(e, form, setForm)}
+              onChange={(e) => handleFormChange(e, form, setForm)}
               type="password"
               required
             />
@@ -137,7 +147,7 @@ const RegisterUserForm: React.FC<IProps> = ({
               label="Confirm Password"
               value={confirmPassword}
               type="password"
-              onChange={(e)=>setConfirmPassword(e.target.value)}
+              onChange={(e) => setConfirmPassword(e.target.value)}
               required
               error={errors.password}
             />
@@ -151,33 +161,32 @@ const RegisterUserForm: React.FC<IProps> = ({
               type="street"
               label="Street"
               value={form.street}
-              onChange={(e)=>handleFormChange(e, form, setForm)}
+              onChange={(e) => handleFormChange(e, form, setForm)}
               required
               error={errors.street}
             />
           </Col>
           <Col {...cols}>
-            <FormInput
-              id="state"
-              name="state"
-              type="state"
+            <DropdownStates
               label="State"
-              value={form.state}
-              onChange={(e)=>handleFormChange(e, form, setForm)}
+              showSearch
               required
-              error={errors.state}
+              value={form.state}
+              onChange={(_: unknown, option: ISelect | ISelect[]) => {
+                const val = option as ISelect;
+                setForm({ ...form, state: val.label, city: "" });
+                handleGetCityList(val.value);
+              }}
             />
           </Col>
           <Col {...cols}>
-            <FormInput
-              id="city"
-              name="city"
-              type="city"
-              label="City"
-              value={form.city}
-              onChange={(e)=>handleFormChange(e, form, setForm)}
-              required
+            <DropdownCity
               error={errors.city}
+              showSearch
+              required
+              label="City"
+              onChange={(value) => setForm({ ...form, city: value })}
+              value={form.city}
             />
           </Col>
           <Col {...cols} className="row-gutter-bottom">
@@ -187,8 +196,8 @@ const RegisterUserForm: React.FC<IProps> = ({
               type="zipCode"
               label="Zip Code"
               value={form.zipCode}
-              onChange={(e)=>handleFormChange(e, form, setForm)}
-              error={errors.zipCode}
+              onChange={(e) => handleFormChange(e, form, setForm)}
+              error={errors.zipCode || errorZipCode}
               required
             />
           </Col>
@@ -201,7 +210,7 @@ const RegisterUserForm: React.FC<IProps> = ({
               type="phoneNumber"
               label="Phone Number"
               value={form.phoneNumber}
-              onChange={(e)=>handleFormChange(e, form, setForm)}
+              onChange={(e) => handleFormChange(e, form, setForm)}
               required
               error={errors.phoneNumber}
             />

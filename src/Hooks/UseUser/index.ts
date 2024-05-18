@@ -177,7 +177,7 @@ const useUser = () => {
 
   useClearError({
     action: () => dispatch(clearErrorRegisterUser()),
-    errorString: [userData.errorRegisterUser],
+    errorString: [userData.errorEmail, userData.errorZipCode],
   });
 
   useClearError({
@@ -189,7 +189,8 @@ const useUser = () => {
     loading: userData.loading,
     handleCreatePrivateUser,
     handleCreateDealership,
-    registerUserError: userData.errorRegisterUser,
+    errorEmail: userData.errorEmail,
+    errorZipCode: userData.errorZipCode,
     confirmCreatedUser: userData.confirmCreatedUser,
     handleConfirmCreatedUser,
     userData: userData.user,
