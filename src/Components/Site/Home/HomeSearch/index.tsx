@@ -1,7 +1,7 @@
 import { SearchOutlined } from "@ant-design/icons";
 import { Col, Input, Row, Select, Typography } from "antd";
 import DefaultButton from "../../../Common/DefaultButton";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { ISelect } from "../../../../Data/Common/ISelect";
 import { minList } from "../../../../Utils/SearchLists/MInList";
 import { maxList } from "../../../../Utils/SearchLists/MaxList";
@@ -23,6 +23,15 @@ const HomeSearch: React.FC<IProps> = ({
 }) => {
   const cols = { xs: 24, sm: 24, md: 12, lg: 8, xl: 8 };
   const cols2 = { xs: 12, sm: 12, md: 12, lg: 12, xl: 12 };
+  const [modelId, setModelId] = useState('');
+  const handleChangeMake = (id:string) => {
+    handleGetModelsListById(id);
+    setModelId("")
+  }
+
+  const handleChangeModel = (id:string) => {
+    setModelId(id)
+  }
 
   useEffect(() => {
     handleGetMakesList();
@@ -41,7 +50,7 @@ const HomeSearch: React.FC<IProps> = ({
             placeholder="Make"
             size="large"
             options={[{ value: null, label: "All Makes" }, ...makesList]}
-            onChange={(value) => handleGetModelsListById(value)}
+            onChange={(value) => handleChangeMake(value)}
           />
         </Col>
         <Col {...cols}>
@@ -50,6 +59,8 @@ const HomeSearch: React.FC<IProps> = ({
             placeholder="Model"
             size="large"
             options={[{ value: "", label: "All Models" }, ...modelsList]}
+            onChange={(value) => handleChangeModel(value)}
+            value={modelId}
           />
         </Col>
         <Col {...cols}>

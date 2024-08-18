@@ -12,6 +12,9 @@ import { getCookie } from "../Utils/HandleCookie";
 import { LOGIN_TOKEN } from "../Configs/Constants/Tokens";
 import { SiteTemplate } from "../Components/Template/SiteTemplate";
 import { Profile } from "../Pages/Profile";
+import SellCarPage from "../Pages/SellCar";
+import "../App.scss";
+
 function AppRoutes() {
   const loggedIn = getCookie(LOGIN_TOKEN) && (
     <Routes>
@@ -23,6 +26,7 @@ function AppRoutes() {
           element={<ActivateAccount />}
         />
         <Route path="/profile" element={<Profile />} />
+        <Route path="/sell_car" element={<SellCarPage />} />
         <Route path="*" element={<Navigate to="/" />} />
       </Route>
     </Routes>

@@ -1,0 +1,40 @@
+.color-picker {
+    &__button {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        border: 1px solid #d9d9d9;
+        height: 30px;
+        width: 30px;
+        border-radius: 5px;
+        cursor: pointer;
+      
+
+        div {
+            width: 80%;
+            height: 80%;
+        }
+    }
+
+    &__color {
+        height:30px;
+        width:30px;
+        border-radius: 5px;
+        cursor: pointer;
+        border: 1px solid #d9d9d9
+    }
+
+    &__color-label {
+        font-size: 10px;
+    }
+
+    &__card {
+        max-width: 400px;
+
+        &-col {
+            display: flex; 
+            flex-direction: column;
+            align-items: center;
+        }
+    }
+}
