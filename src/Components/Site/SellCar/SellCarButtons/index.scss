@@ -1,0 +1,22 @@
+.sell-car-buttons {
+    display: flex;
+    justify-content: space-between;
+    &__submit {
+        button {
+            &:first-child {
+                margin-right: 1rem;
+            }
+        }
+    }
+
+    &__actions {
+        display: inline;
+        margin-right: 1rem;
+        button {
+            &:first-child {
+                margin-right: 1rem;
+            }
+        }
+        
+    }
+}

@@ -53,6 +53,8 @@ h1 {
 @import "./Pages/AccountCreated";
 @import "./Pages/Profile";
 @import "./Pages/Dashboard";
+@import "./Pages/SellCar";
+
 
 // Components Site
 @import "./Components/Site/Home/HomeHeader/HomeHeader";
@@ -66,15 +68,19 @@ h1 {
 @import "./Components/Site/Profile/ProfileItem";
 @import "./Components/Site/Profile/UserDetails";
 @import "./Components/Site/Dashboard/DashboardSearch";
+@import "./Components/Site/SellCar/SellCarDetails";
 
 // Components Common
 @import "./Components/Common/Navbar/navbar";
 @import "./Components/Common/BackButton/backButton";
-@import "./Components/Common/LinkButton/index.scss";
-@import "./Components/Common/DefaultButton/index.scss";
+@import "./Components/Common/LinkButton";
+@import "./Components/Common/DefaultButton";
 @import "./Components/Common/HeaderText";
 @import "./Components/Common/FormInput";
 @import "./Components/Common/SiteNavbar";
 @import "./Components/Template/SiteTemplate";
 @import "./Components/Common/SiteModal";
 @import "./Components/Common/Loading";
+@import "./Components/Common/ColorPicker";
+@import "./Components/Common/RadioButton";
+

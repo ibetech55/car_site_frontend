@@ -41,11 +41,11 @@ const Dropdown: React.FC<IProps> = ({
         showSearch={showSearch}
         optionFilterProp="children"
         filterOption={showSearch ? (input, option) => (option?.label ?? "").includes(input) : undefined}
-        filterSort={showSearch ? (optionA, optionB) =>
-          (optionA?.label ?? "")
-            .toLowerCase()
-            .localeCompare((optionB?.label ?? "").toLowerCase()) : undefined
-        }
+        // filterSort={showSearch ? (optionA, optionB) =>
+        //   (optionA?.label ?? "")
+        //     .toLowerCase()
+        //     .localeCompare((optionB?.label ?? "").toLowerCase()) : undefined
+        // }
         className="home-search__select"
         size={size}
         options={options}

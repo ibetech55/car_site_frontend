@@ -4,6 +4,7 @@ export const theme: ConfigProviderProps = {
   theme: {
     token: {
       colorPrimary: primaryColor,
+      colorError: "red"
     },
     components: {
       Dropdown: {
@@ -16,7 +17,7 @@ export const theme: ConfigProviderProps = {
         marginSM: 0,
         marginXS: 0,
         borderRadiusLG: 0,
-      },
+      }
     },
   },
   button: {

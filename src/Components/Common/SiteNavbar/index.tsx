@@ -46,7 +46,7 @@ const SiteNavbar = () => {
           <Link to="#">
             <Typography>News & Videos</Typography>
           </Link>
-          <Link to="#">
+          <Link to="/sell_car">
             <Typography>Sell Your Car</Typography>
           </Link>
           <Link to="#">
