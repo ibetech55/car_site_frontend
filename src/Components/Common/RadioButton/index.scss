@@ -1,4 +1,7 @@
 .radio-button {
+    &__form-label {
+        display: block;
+    }
     &__button{
         display: inline;
     }

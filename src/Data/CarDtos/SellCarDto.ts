@@ -12,4 +12,8 @@ export interface ISellCarForm {
     zipCode: string;
     mileage:string;
     numberOwners: string;
+    price:string;
+    hasIssue:string;
+    cleanHistoryReport:string;
+    accident: string;
 }

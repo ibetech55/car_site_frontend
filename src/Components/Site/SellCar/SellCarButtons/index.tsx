@@ -6,9 +6,10 @@ interface IProps {
     current: number;
     handlePrevious: (value:number) => void;
     handleNext: (value:number) => void;
+    handleSubmit: () => void;
 }
 
-const SellCarButtons: React.FC<IProps> = ({ current, handlePrevious, handleNext }: IProps) => {
+const SellCarButtons: React.FC<IProps> = ({ current, handlePrevious, handleNext, handleSubmit }: IProps) => {
     return (
         <div className="sell-car-buttons">
             <div className="sell-car-buttons__actions">
@@ -28,7 +29,7 @@ const SellCarButtons: React.FC<IProps> = ({ current, handlePrevious, handleNext 
                 />
                 <DefaultButton
                     title="Submit"
-                    onClick={() => { }}
+                    onClick={handleSubmit}
                 />
             </div>
         </div>

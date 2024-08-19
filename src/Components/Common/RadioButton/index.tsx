@@ -17,7 +17,7 @@ interface IProps {
 const RadioButton: React.FC<IProps> = ({ label, id, value, onChange, options }) => {
     return (
         <div className="radio-button">
-            <label htmlFor="">{label}</label>
+            <label htmlFor={id} className='radio-button__form-label'>{label}</label>
             <Radio.Group
                 onChange={(e)=>onChange(e.target.value)}
                 value={value}

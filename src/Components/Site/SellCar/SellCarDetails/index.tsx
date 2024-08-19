@@ -10,6 +10,7 @@ import ColorPicker, { IColors } from '../../../Common/ColorPicker'
 import "./index.scss"
 import { handleFormChange } from '../../../../Utils/HandleFormChange'
 import RadioButton from '../../../Common/RadioButton'
+import SectionText from '../../../Common/SectionText'
 
 interface IProps {
   handleGetMakesList: (stateCode: string) => void;
@@ -38,7 +39,7 @@ const exteriorColors: IColors[] = [
   { label: "Light green", color: "#66FF99" },
   { label: "Blue", color: "blue" },
   { label: "Dark blue", color: "#00156D" },
-  { label: "Bright blue", color: "#0096FF"	 },
+  { label: "Bright blue", color: "#0096FF" },
   { label: "Light blue", color: "#ADD8E6" }
 ]
 
@@ -66,7 +67,7 @@ const SellCarDetails: React.FC<IProps> = ({ handleGetMakesList, handleGetModelsL
 
   return (
     <div className='sell-car-details'>
-      <h1>Details</h1>
+      <SectionText text="Details" />
 
       <Row gutter={[40, 40]} className="row-gutter-bottom">
         <Col {...cols}>
