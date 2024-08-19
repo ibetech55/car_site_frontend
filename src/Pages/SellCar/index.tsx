@@ -27,7 +27,12 @@ const SellCarPage = () => {
     zipCode: '',
     mileage: '',
     numberOwners: '',
+    price: '',
+    hasIssue: 'no',
+    cleanHistoryReport: 'no',
+    accident: 'no'
   };
+  
   const { handleGetMakesList, handleGetModelsListById } = useBrand()
   const [current, setCurrent] = useState(0);
   const [form, setForm] = useState(initForm);
@@ -38,8 +43,9 @@ const SellCarPage = () => {
 
   const handleNext = (value: number) => setCurrent(value + 1)
   const handlePrevious = (value: number) => setCurrent(value - 1)
-
-
+  const handleSubmit = () => {
+    console.log(form)
+  }
 
   return (
     <div className="sell-car-page">
@@ -61,12 +67,17 @@ const SellCarPage = () => {
             )}
             {current === 1 && (
               <>
-                <SellCarPrice />
+                <SellCarPrice
+                  form={form}
+                  setForm={setForm} />
               </>
             )}
             {current === 2 && (
               <>
-                <SellCarCondition />
+                <SellCarCondition 
+                 form={form}
+                 setForm={setForm}
+                />
               </>
             )}
             {current === 3 && (
@@ -85,7 +96,11 @@ const SellCarPage = () => {
               </>
             )}
             <div className="sell-car-page__forms-btns">
-              <SellCarButtons current={current} handleNext={handleNext} handlePrevious={handlePrevious} />
+              <SellCarButtons 
+                current={current} 
+                handleNext={handleNext} 
+                handlePrevious={handlePrevious} 
+                handleSubmit={handleSubmit} />
             </div>
           </Form>
         </div>
