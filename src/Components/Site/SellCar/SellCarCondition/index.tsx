@@ -16,6 +16,13 @@ const affirmativeOptions = [
   { label: "No", value: "no" },
 ]
 
+const conditionOptions = [
+  { label: "Excellent", value: "EXCELLENT" },
+  { label: "Very Good", value: "VERY GOOD" },
+  { label: "Good", value: "GOOD" },
+  { label: "Fair", value: "FAIR" },
+]
+
 
 const SellCarCondition: React.FC<IProps> = ({ form, setForm }) => {
   return (
@@ -23,6 +30,13 @@ const SellCarCondition: React.FC<IProps> = ({ form, setForm }) => {
       <SectionText text="Condition" />
 
       <Row gutter={[40, 40]} className="row-gutter-bottom">
+      <Col {...cols}>
+          <RadioButton
+            label="Condition"
+            value={form.condition}
+            options={conditionOptions}
+            onChange={(val) => setForm({ ...form, condition: val })} />
+        </Col>
         <Col {...cols}>
           <RadioButton
             label="Has this car ever been in a car accident"
