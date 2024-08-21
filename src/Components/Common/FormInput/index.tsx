@@ -1,8 +1,9 @@
 import { Input } from "antd";
 import React from "react";
+import Label from "../Label";
 
 export interface IProps {
-  label?: string;
+  label: string;
   name?: string;
   id?: string;
   value: string;
@@ -25,7 +26,7 @@ const FormInput: React.FC<IProps> = ({
 }) => {
   return (
     <div className="form-input">
-      <label htmlFor={id}>{required && <span style={{color: 'red'}}>* </span>}{label}</label>
+      <Label id={id} required={required} label={label} />
       <Input
         placeholder={placeholder}
         id={id}

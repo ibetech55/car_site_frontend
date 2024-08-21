@@ -1,3 +1,5 @@
+
+/* eslint-disable @typescript-eslint/no-explicit-any */
 export interface ISellCarForm {
     make: string;
     model:string;
@@ -16,4 +18,6 @@ export interface ISellCarForm {
     hasIssue:string;
     cleanHistoryReport:string;
     accident: string;
+    defaultImage: any;
+    condition: string;
 }

@@ -1,0 +1,16 @@
+.sell-car-images {
+    &__default {
+        height: 350px;
+
+        &__img-div {
+            height: 100%;
+            width: 100%;
+
+            img {
+                display: block;
+                height: 100%;
+                width: 100%;
+            }
+        }
+    }
+}

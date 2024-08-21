@@ -1,6 +1,7 @@
 import { Card, Col, Dropdown, Row, Typography } from 'antd'
 import React, { useState } from 'react'
 import "./index.scss";
+import Label from '../Label';
 
 export interface IColors {
     color: string;
@@ -8,11 +9,11 @@ export interface IColors {
 }
 
 interface IProps {
-    label:string;
+    label: string;
     colors: IColors[];
-    colorSelected?:string;
-    onChange:(color:string) => void;
-    id?:string;
+    colorSelected?: string;
+    onChange: (color: string) => void;
+    id?: string;
 }
 const cols = { xs: 6, sm: 6, md: 6, lg: 6, xl: 6 };
 
@@ -20,7 +21,7 @@ const ColorPicker: React.FC<IProps> = ({ colors, colorSelected, onChange, label,
     const [colorLabelSelected, colorlabelSelected] = useState("");
     return (
         <div className='color-picker'>
-            <label htmlFor={id}>{label}</label>
+            <Label id={id} label={label} required />
             <div>
                 <Dropdown
                     trigger={["click"]}
@@ -31,7 +32,7 @@ const ColorPicker: React.FC<IProps> = ({ colors, colorSelected, onChange, label,
                             <Row gutter={[12, 12]} className="row-gutter-bottom">
                                 {colors.map((color, index) => (
                                     <Col {...cols} key={index} className="color-picker__card-col">
-                                        <div onClick={()=>{
+                                        <div onClick={() => {
                                             colorlabelSelected(color.label);
                                             onChange(color.color)
                                         }} className="color-picker__color" style={{ background: color.color }}></div>
@@ -44,7 +45,7 @@ const ColorPicker: React.FC<IProps> = ({ colors, colorSelected, onChange, label,
                     )}
                 >
                     <div className='color-picker__button'>
-                        <div style={{backgroundColor:colorSelected ? colorSelected : "#d9d9d9" }}></div>
+                        <div style={{ backgroundColor: colorSelected ? colorSelected : "#d9d9d9" }}></div>
                     </div>
                 </Dropdown>
             </div>
