@@ -1,10 +1,10 @@
-import React, { useEffect, useState } from 'react'
+import { useEffect, useState } from 'react'
 import SellCarSteps from '../../Components/Site/SellCar/SellCarSteps';
 import { Form } from 'antd';
 import SellCarDetails from '../../Components/Site/SellCar/SellCarDetails';
 import SellCarPrice from '../../Components/Site/SellCar/SellCarPrice';
 import SellCarCondition from '../../Components/Site/SellCar/SellCarCondition';
-import SellCarUser from '../../Components/Site/SellCar/SellCarUser';
+import SellCarPersonalInfo from '../../Components/Site/SellCar/SellCarPersonalInfo';
 import SellCarImages from '../../Components/Site/SellCar/SellCarImages';
 import SellCarButtons from '../../Components/Site/SellCar/SellCarButtons';
 import SellCarFeatures from '../../Components/Site/SellCar/SellCarFeatures';
@@ -12,6 +12,9 @@ import "./index.scss"
 import useBrand from '../../Hooks/UseBrand';
 import { ISellCarForm } from '../../Data/CarDtos/SellCarDto';
 import useFeature from '../../Hooks/UseFeature';
+import SmallCarComments from '../../Components/Site/SellCar/SmallCarComments';
+import useUser from '../../Hooks/UseUser';
+import { WithAuth } from '../../Components/Template/WithAuth';
 export interface ICarImages {
   uid: string;
   name: string;
@@ -39,12 +42,15 @@ const initForm: ISellCarForm = {
   accident: 'no',
   defaultImage: undefined,
   condition: '',
-  features: []
+  features: [],
+  comment: '',
+  termsCondition: false,
+  vin: ''
 };
 
 const SellCarPage = () => {
   const { handleGetFeaturesGrouped, featuresGroupedData } = useFeature();
-
+  const { loggedUser, handleGetUserById, userData } = useUser();
   const { handleGetMakesList, handleGetModelsListById } = useBrand()
   const [current, setCurrent] = useState(0);
   const [form, setForm] = useState(initForm);
@@ -65,6 +71,9 @@ const SellCarPage = () => {
   }
 
   useEffect(() => {
+    if (loggedUser.id) {
+      handleGetUserById(loggedUser.id)
+    }
     handleGetFeaturesGrouped();
   }, [])
 
@@ -122,7 +131,14 @@ const SellCarPage = () => {
             )}
             {current === 5 && (
               <>
-                <SellCarUser />
+                <SmallCarComments form={form}
+                  setForm={setForm} />
+              </>
+            )}
+            {current === 6 && (
+              <>
+                <SellCarPersonalInfo userData={userData} form={form}
+                  setForm={setForm} />
               </>
             )}
             <div className="sell-car-page__forms-btns">
@@ -139,4 +155,4 @@ const SellCarPage = () => {
   )
 }
 
-export default SellCarPage
+export const SellCar = WithAuth(SellCarPage);

@@ -37,8 +37,12 @@ const SellCarSteps: React.FC<IProps> = ({ current, setCurrentChange }) => {
                         description: "Select car features",
                     },
                     {
-                        title: "User",
-                        description: "User information",
+                        title: "Comments",
+                        description: "Select car features",
+                    },
+                    {
+                        title: "Personal Information",
+                        description: "Information about seller",
                     }
                 ]}
             />
