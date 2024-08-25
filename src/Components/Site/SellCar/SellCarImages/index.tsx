@@ -1,5 +1,5 @@
 import React, { useCallback, useState } from 'react';
-import { InboxOutlined } from '@ant-design/icons';
+import { DeleteOutlined, ExpandOutlined, InboxOutlined } from '@ant-design/icons';
 import type { UploadProps } from 'antd';
 import { Col, Row, Upload } from 'antd';
 import SectionText from '../../../Common/SectionText';
@@ -11,9 +11,9 @@ import {
 import { arrayMove } from '@dnd-kit/sortable';
 import SellCarImagesGrid from '../SellCarImagesGrid';
 import { ICarImages } from '../../../../Pages/SellCar';
-import "./index.scss";
 import ViewLargeImage from '../../../Common/ViewLargeImage';
 import Label from '../../../Common/Label';
+import "./index.scss";
 
 const { Dragger } = Upload;
 const cols = { xs: 24, sm: 24, md: 24, lg: 12, xl: 12 };
@@ -141,6 +141,16 @@ const SellCarImages: React.FC<IProps> = ({ form, setForm, carImages, setCarImage
               <div className="sell-car-images__default__img-div">
                 <img src={form.defaultImage.previewUrl} alt="default-car-image" />
               </div>
+              <DeleteOutlined
+                className="sell-car-images__default__delete-icon delete-icon icon-size"
+                onClick={() => setForm({ ...form, defaultImage: undefined })}
+              />
+              <ExpandOutlined
+                className="icon-size"
+                onClick={() => {
+                  setActivePreviewUrl(form.defaultImage.previewUrl)
+                  setOpenModal(true);
+                }} />
             </Col>}
 
           <Col className="sell-car-images__multiple" {...cols2}>
@@ -159,12 +169,13 @@ const SellCarImages: React.FC<IProps> = ({ form, setForm, carImages, setCarImage
                 banned files.
               </p>
             </Dragger>
+
+
           </Col>
         </Row>
 
 
-
-        <div style={{ marginTop: "3rem" }}>
+        {carImages.length > 0 && <div className='sell-car-images__multiple-images'>
           <SellCarImagesGrid items={carImages}
             handleDragCancel={handleDragCancel} handleDragEnd={handleDragEnd} handleDragStart={handleDragStart} activeId={activeId} activePreviewUrl={activePreviewUrl}
             handleDeleteCarImage={handleDeleteCarImage}
@@ -172,6 +183,7 @@ const SellCarImages: React.FC<IProps> = ({ form, setForm, carImages, setCarImage
             handleOpenModal={() => setOpenModal(true)}
           />
         </div>
+        }
       </div>
       <ViewLargeImage imageUrl={activePreviewUrl} open={openModal} onCancel={() => setOpenModal(false)} />
     </>

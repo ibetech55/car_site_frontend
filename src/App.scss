@@ -48,6 +48,14 @@ h1 {
   top: 12px !important;
 }
 
+.delete-icon {
+  color: red;
+}
+
+.icon-size {
+  font-size: 15px;
+}
+
 // Pages
 @import "./Pages/Home/HomePage";
 @import "./Pages/Options";
