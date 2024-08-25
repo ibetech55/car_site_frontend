@@ -4,8 +4,8 @@ import "./index.scss";
 
 interface IProps {
     current: number;
-    handlePrevious: (value:number) => void;
-    handleNext: (value:number) => void;
+    handlePrevious: (value: number) => void;
+    handleNext: (value: number) => void;
     handleSubmit: () => void;
 }
 
@@ -17,7 +17,7 @@ const SellCarButtons: React.FC<IProps> = ({ current, handlePrevious, handleNext,
                     title="Previous"
                     onClick={() => handlePrevious(current)}
                 />}
-                {current < 5 && <DefaultButton
+                {current < 6 && <DefaultButton
                     title="Next"
                     onClick={() => handleNext(current)}
                 />}

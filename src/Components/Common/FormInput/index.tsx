@@ -7,11 +7,12 @@ export interface IProps {
   name?: string;
   id?: string;
   value: string;
-  onChange: React.ChangeEventHandler<HTMLInputElement> | undefined
+  onChange: (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => void;
   error?: string;
   placeholder?: string;
   required?: boolean;
   type?: string;
+  disabled?: boolean;
 }
 const FormInput: React.FC<IProps> = ({
   label,
@@ -22,7 +23,8 @@ const FormInput: React.FC<IProps> = ({
   error,
   placeholder,
   required,
-  type
+  type,
+  disabled = false
 }) => {
   return (
     <div className="form-input">
@@ -35,8 +37,9 @@ const FormInput: React.FC<IProps> = ({
         onChange={onChange}
         style={{ border: error && "1px solid red" }}
         type={type}
+        disabled={disabled}
       />
-      <span style={{color: 'red'}}>{error}</span>
+      <span style={{ color: 'red' }}>{error}</span>
     </div>
   );
 };

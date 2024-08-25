@@ -1,5 +1,4 @@
 
-/* eslint-disable @typescript-eslint/no-explicit-any */
 export interface ISellCarForm {
     make: string;
     model: string;
@@ -21,4 +20,7 @@ export interface ISellCarForm {
     defaultImage: any;
     condition: string;
     features: string[]
+    comment: string;
+    termsCondition: boolean;
+    vin: string;
 }
