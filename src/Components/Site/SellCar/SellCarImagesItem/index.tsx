@@ -2,6 +2,8 @@ import React, { CSSProperties, FC } from "react";
 import { useSortable } from "@dnd-kit/sortable";
 import { CSS } from "@dnd-kit/utilities";
 import { DeleteOutlined, ExpandOutlined } from "@ant-design/icons";
+import { Image } from "antd";
+import "./index.scss";
 
 interface IProps {
     id: number;
@@ -26,10 +28,10 @@ const SellCarImagesItem: FC<IProps> = (props) => {
     const inlineStyles: CSSProperties = {
         opacity: isDragging ? 0.5 : 1,
         transformOrigin: '50% 50%',
-        height: '400px',
-        width: '400px',
+        height: '250px',
+        maxWidth: '100%',
         borderRadius: '10px',
-        cursor: isDragging ? 'grabbing' : 'grab',
+        cursor: isDragging ? 'grabbing' : 'grabbing',
         backgroundColor: '#ffffff',
         display: 'flex',
         justifyContent: 'center',
@@ -37,7 +39,7 @@ const SellCarImagesItem: FC<IProps> = (props) => {
         boxShadow: isDragging ? 'rgb(63 63 68 / 5%) 0px 2px 0px 2px, rgb(34 33 81 / 15%) 0px 2px 3px 2px' : 'rgb(63 63 68 / 5%) 0px 0px 0px 1px, rgb(34 33 81 / 15%) 0px 1px 3px 0px',
         transform: CSS.Transform.toString(transform),
         transition: transition || undefined,
-        marginBottom: 5
+        marginBottom: 5,
     };
 
 
@@ -46,7 +48,7 @@ const SellCarImagesItem: FC<IProps> = (props) => {
         props.handleopenmodal && props.handleopenmodal()
     }
     return (
-        <>
+        <div className="sell-car-images-item__delete-icon">
             <div ref={setNodeRef}
                 withOpacity={isDragging}
                 {...attributes}
@@ -60,14 +62,15 @@ const SellCarImagesItem: FC<IProps> = (props) => {
                     }
                 }}
             >
-                <img src={props.previewUrl} alt={props.previewUrl} style={{ display: "block", width: "100%", height: "100%" }} />
+
+                <Image src={props.previewUrl} height="100%" width="100%" preview={false} />
             </div>
-            <DeleteOutlined style={{ color: "red", fontSize: 15, marginRight: 5 }}
+            <DeleteOutlined className="sell-car-images-item__delete-icon delete-icon icon-size"
                 onClick={() => props.handledeletecarimage && props.handledeletecarimage(Number(props.id))} />
             <ExpandOutlined onClick={() => {
                 handleExpandImage()
-            }} style={{ fontSize: 15 }} />
-        </>
+            }} className="icon-size" />
+        </div>
     );
 };
 
