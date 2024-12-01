@@ -1,10 +1,10 @@
 import { PayloadAction, createSlice } from "@reduxjs/toolkit";
-import { initialState } from "./FeatureState";
-import { getFeaturesGrouped } from "./FeatureAction";
+import { initialState } from "./CarState";
+import { getFeaturesGrouped, postSellCar } from "./CarAction";
 import { IFeaturesGrouped } from "../../Data/CarDtos/GetFeatureDtos";
 
 const featureSlice = createSlice({
-    name: "feature",
+    name: "car",
     initialState,
     reducers: {
     },
@@ -20,6 +20,15 @@ const featureSlice = createSlice({
                     state.loading = false;
                 }
             )
+            .addCase(postSellCar.pending, (state) => {
+                state.loading = true;
+            })
+            .addCase(postSellCar.fulfilled, (state) => {
+                state.loading = false;
+            })
+            .addCase(postSellCar.rejected, (state) => {
+                state.loading = false;
+            })
     },
 });
 export default featureSlice.reducer;

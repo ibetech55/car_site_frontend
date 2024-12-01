@@ -1,16 +1,15 @@
 import React, { useCallback, useState } from 'react';
 import { DeleteOutlined, ExpandOutlined, InboxOutlined } from '@ant-design/icons';
 import type { UploadProps } from 'antd';
-import { Col, Row, Upload } from 'antd';
+import { Col, Row, Typography, Upload } from 'antd';
 import SectionText from '../../../Common/SectionText';
-import { ISellCarForm } from '../../../../Data/CarDtos/SellCarDto';
+import { ICarImages, IImageErros, ISellCarForm } from '../../../../Data/CarDtos/SellCarDto';
 import {
   DragEndEvent,
   DragStartEvent,
 } from '@dnd-kit/core';
 import { arrayMove } from '@dnd-kit/sortable';
 import SellCarImagesGrid from '../SellCarImagesGrid';
-import { ICarImages } from '../../../../Pages/SellCar';
 import ViewLargeImage from '../../../Common/ViewLargeImage';
 import Label from '../../../Common/Label';
 import "./index.scss";
@@ -25,9 +24,10 @@ interface IProps {
   setForm: (form: ISellCarForm) => void;
   carImages: ICarImages[];
   setCarImages: (carImages: ICarImages[]) => void;
+  errors?: IImageErros
 }
 
-const SellCarImages: React.FC<IProps> = ({ form, setForm, carImages, setCarImages }) => {
+const SellCarImages: React.FC<IProps> = ({ form, setForm, carImages, setCarImages, errors }) => {
   const [defaultImage, setDefaultImage] = useState("");
   const [openModal, setOpenModal] = useState(false);
   const [activeId, setActiveId] = useState<number>(-1);
@@ -55,15 +55,15 @@ const SellCarImages: React.FC<IProps> = ({ form, setForm, carImages, setCarImage
     setActiveId(-1);
   }, []);
 
-  const handleImageUpload = (file: File | FileList) => {
+  const handleImageUpload = (file: File) => {
     if (file) {
       if (form.defaultImage) {
         handleRemoveImage()
       }
       setForm({
         ...form, defaultImage: {
-          ...file,
-          previewUrl: URL.createObjectURL(file as File),
+          file,
+          previewUrl: URL.createObjectURL(file),
         }
       });
     }
@@ -92,10 +92,10 @@ const SellCarImages: React.FC<IProps> = ({ form, setForm, carImages, setCarImage
         const originFileObj = file.originFileObj as File;
 
         return {
-          ...file,
+          file: file.originFileObj,
           previewUrl: URL.createObjectURL(originFileObj),
           id: i + 1
-        };
+        } as ICarImages;
       });
 
       setCarImages([...arr]);
@@ -121,6 +121,7 @@ const SellCarImages: React.FC<IProps> = ({ form, setForm, carImages, setCarImage
           <Col className="sell-car-images__default" {...cols}>
             <Label label="Add default image" required />
             <Dragger
+              style={{ border: errors?.defaulImage && "1px dashed red" }}
               {...defaultImageProps}
               showUploadList={false}
               customRequest={() => { }}
@@ -134,6 +135,7 @@ const SellCarImages: React.FC<IProps> = ({ form, setForm, carImages, setCarImage
                 banned files.
               </p>
             </Dragger>
+            <Typography className='sell-car-images__error error-text'>{errors?.defaulImage}</Typography>
           </Col>
           {form.defaultImage &&
             <Col className="sell-car-images__default" {...cols}>
@@ -159,6 +161,7 @@ const SellCarImages: React.FC<IProps> = ({ form, setForm, carImages, setCarImage
               {...multipleImageProps}
               customRequest={() => { }}
               showUploadList={false}
+              style={{ border: errors?.carImages && "1px dashed red" }}
             >
               <p className="ant-upload-drag-icon">
                 <InboxOutlined />
@@ -169,8 +172,7 @@ const SellCarImages: React.FC<IProps> = ({ form, setForm, carImages, setCarImage
                 banned files.
               </p>
             </Dragger>
-
-
+            <Typography className='sell-car-images__error error-text'>{errors?.carImages}</Typography>
           </Col>
         </Row>
 

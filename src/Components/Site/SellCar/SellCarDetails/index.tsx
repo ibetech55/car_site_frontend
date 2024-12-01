@@ -1,23 +1,27 @@
-import { Col, Row } from 'antd'
+import { Col, Row, Typography } from 'antd'
 import FormInput from '../../../Common/FormInput'
 import DropdownMakes from '../../../Common/DropdownMakes'
 import { ISelect } from '../../../../Data/Common/ISelect'
-import { ISellCarForm } from '../../../../Data/CarDtos/SellCarDto'
+import { IDetailErrors, ISellCarForm } from '../../../../Data/CarDtos/SellCarDto'
 import DropdownModels from '../../../Common/DropdownModels'
 import DropdownYears from '../../../Common/DropdownYears'
 import DropdownTransmission from '../../../Common/DropdownTransmission'
 import ColorPicker, { IColors } from '../../../Common/ColorPicker'
-import "./index.scss"
 import { handleFormChange } from '../../../../Utils/HandleFormChange'
 import RadioButton from '../../../Common/RadioButton'
 import SectionText from '../../../Common/SectionText'
+import DropdownStates from '../../../Common/DropdownStates'
+import DropdownCity from '../../../Common/DropdownCity'
+import useLocation from '../../../../Hooks/UseLoaction'
+import "./index.scss"
+import { error } from 'console'
+import { affirmativeOptions } from '../../../../Configs/Constants/FormTypes'
 
 interface IProps {
-  handleGetMakesList: (stateCode: string) => void;
-  errorEmail: string;
   form: ISellCarForm,
   setForm: (form: ISellCarForm) => void;
   handleGetModelsListById: (id: string) => void;
+  errors?: IDetailErrors;
 }
 
 const exteriorColors: IColors[] = [
@@ -54,16 +58,11 @@ const interiorColors: IColors[] = [
   { label: "Red", color: "red" },
 ]
 
-const SellCarDetails: React.FC<IProps> = ({ handleGetMakesList, handleGetModelsListById, form, setForm }) => {
+const cols = { xs: 24, sm: 24, md: 24, lg: 16, xl: 16 };
+const cols2 = { xs: 24, sm: 24, md: 8, lg: 8, xl: 8 };
 
-
-  const cols = { xs: 24, sm: 24, md: 24, lg: 12, xl: 12 };
-  const cols2 = { xs: 24, sm: 24, md: 8, lg: 8, xl: 8 };
-
-  const affirmativeOptions = [
-    { label: "Yes", value: "yes" },
-    { label: "No", value: "no" },
-  ]
+const SellCarDetails: React.FC<IProps> = ({ handleGetModelsListById, form, setForm, errors }) => {
+  const { handleGetCityList } = useLocation()
 
   return (
     <div className='sell-car-details'>
@@ -75,16 +74,17 @@ const SellCarDetails: React.FC<IProps> = ({ handleGetMakesList, handleGetModelsL
             showSearch
             required
             value={form.make}
+            error={errors?.make}
             onChange={(_: unknown, option: ISelect | ISelect[]) => {
               const val = option as ISelect;
               setForm({ ...form, make: val.label, model: "" });
               handleGetModelsListById(val.value);
-              handleGetMakesList(val.value);
             }} />
         </Col>
         <Col {...cols}>
           <DropdownModels label="Model"
             showSearch
+            error={errors?.model}
             required
             value={form.model}
             onChange={(_: unknown, option: ISelect | ISelect[]) => {
@@ -97,6 +97,7 @@ const SellCarDetails: React.FC<IProps> = ({ handleGetMakesList, handleGetModelsL
             label="Year"
             showSearch
             required
+            error={errors?.year}
             value={form.year}
             onChange={(_: unknown, option: ISelect | ISelect[]) => {
               const val = option as ISelect;
@@ -107,6 +108,7 @@ const SellCarDetails: React.FC<IProps> = ({ handleGetMakesList, handleGetModelsL
         <Col {...cols}>
           <DropdownTransmission
             label="Transmission"
+            error={errors?.transmission}
             showSearch
             required
             value={form.transmission}
@@ -118,6 +120,7 @@ const SellCarDetails: React.FC<IProps> = ({ handleGetMakesList, handleGetModelsL
         </Col>
         <Col {...cols}>
           <FormInput
+            error={errors?.drivetrain}
             label="Drivetrain"
             id="drivetrain"
             name="drivetrain"
@@ -129,6 +132,7 @@ const SellCarDetails: React.FC<IProps> = ({ handleGetMakesList, handleGetModelsL
         <Col {...cols}>
           <FormInput
             label="Engine"
+            error={errors?.engine}
             required
             value={form.engine}
             name="engine"
@@ -146,6 +150,7 @@ const SellCarDetails: React.FC<IProps> = ({ handleGetMakesList, handleGetModelsL
                 colorSelected={form.exteriorColor}
                 onChange={(colorSel) => setForm({ ...form, exteriorColor: colorSel })}
               />
+              {errors?.exteriorColor && <Typography style={{ color: "red" }}>{errors?.exteriorColor}</Typography>}
             </Col>
             <Col>
               <ColorPicker
@@ -155,6 +160,7 @@ const SellCarDetails: React.FC<IProps> = ({ handleGetMakesList, handleGetModelsL
                 colorSelected={form.interiorColor}
                 onChange={(colorSel) => setForm({ ...form, interiorColor: colorSel })}
               />
+              {errors?.interiorColor && <Typography style={{ color: "red" }}>{errors?.interiorColor}</Typography>}
             </Col>
           </Row>
         </Col>
@@ -168,11 +174,52 @@ const SellCarDetails: React.FC<IProps> = ({ handleGetMakesList, handleGetModelsL
             value={form.mileage}
             onChange={(e) => handleFormChange(e, form, setForm)}
             type="number"
+            error={errors?.mileage}
+          />
+        </Col>
+        <Col {...cols}>
+          <FormInput
+            label="Street Address"
+            name="streetAddress"
+            id="streetAddress"
+            required
+            value={form.streetAddress}
+            onChange={(e) => handleFormChange(e, form, setForm)}
+            error={errors?.streetAddress}
+          />
+        </Col>
+        <Col {...cols}>
+          <DropdownStates
+            label="State"
+            showSearch
+            required
+            value={form.state}
+            error={errors?.state}
+            onChange={(_: unknown, option: ISelect | ISelect[]) => {
+              const val = option as ISelect;
+              setForm({ ...form, state: val.label, city: "" });
+              handleGetCityList(val.value);
+            }}
+          />
+        </Col>
+
+        <Col {...cols}>
+          <DropdownCity
+            label="City"
+            error={errors?.city}
+            showSearch
+            required
+            value={form.city}
+            onChange={(_: unknown, option: ISelect | ISelect[]) => {
+              const val = option as ISelect;
+              setForm({ ...form, city: val.label });
+            }}
           />
         </Col>
         <Col {...cols}>
           <FormInput
             label="Zip Code"
+            error={errors?.zipCode}
             name="zipCode"
             id="zipCode"
             required
@@ -185,6 +232,7 @@ const SellCarDetails: React.FC<IProps> = ({ handleGetMakesList, handleGetModelsL
             <Col {...cols2}>
               <FormInput
                 label="Number of owners"
+                error={errors?.numberOwners}
                 required
                 id="numberOwners"
                 name="numberOwners"
@@ -198,7 +246,8 @@ const SellCarDetails: React.FC<IProps> = ({ handleGetMakesList, handleGetModelsL
                 label="Making payments"
                 value={form.hasPayments}
                 options={affirmativeOptions}
-                onChange={(val) => setForm({ ...form, hasPayments: val })} />
+                onChange={(val) => setForm({ ...form, hasPayments: val as boolean })} />
+              {errors?.hasPayments && <Typography style={{ color: "red" }}>{errors?.hasPayments}</Typography>}
             </Col>
             <Col {...cols2}>
               <FormInput
@@ -209,6 +258,7 @@ const SellCarDetails: React.FC<IProps> = ({ handleGetMakesList, handleGetModelsL
                 value={form.numberKeys}
                 onChange={(e) => handleFormChange(e, form, setForm)}
                 type="number"
+                error={errors?.numberKeys}
               />
             </Col>
           </Row>

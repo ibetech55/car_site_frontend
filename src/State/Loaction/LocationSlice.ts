@@ -1,9 +1,10 @@
 import { PayloadAction, createSlice } from "@reduxjs/toolkit";
 import { initialState } from "./LocationState";
-import { getCityList, getStateList } from "./LocationActions";
+import { getCityList, getStateList, getZipCode } from "./LocationActions";
 import {
   IGetCityList,
   IGetStateList,
+  IZipCode,
 } from "../../Data/LocationDtos/LocationDtos";
 
 const locationSlice = createSlice({
@@ -36,6 +37,13 @@ const locationSlice = createSlice({
             value: x.name,
             label: x.name,
           }));
+        }
+      )
+      .addCase(
+        getZipCode.fulfilled,
+        (state, action: PayloadAction<IZipCode>) => {
+          state.loading = false;
+          state.zipCode = action.payload;
         }
       );
   },
