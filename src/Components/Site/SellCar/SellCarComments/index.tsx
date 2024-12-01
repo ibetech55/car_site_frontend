@@ -12,7 +12,7 @@ interface IProps {
   setForm: (form: ISellCarForm) => void;
 }
 
-const SmallCarComments: React.FC<IProps> = ({ form, setForm }) => {
+const SellCarComments: React.FC<IProps> = ({ form, setForm }) => {
   return (
     <div>
       <SectionText text='Comments' />
@@ -25,4 +25,4 @@ const SmallCarComments: React.FC<IProps> = ({ form, setForm }) => {
   )
 }
 
-export default SmallCarComments
+export default SellCarComments

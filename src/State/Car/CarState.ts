@@ -1,11 +1,11 @@
 import { IFeaturesGrouped } from "../../Data/CarDtos/GetFeatureDtos";
 
-export interface FeatureState {
+export interface CarState {
     featuresGrouped: IFeaturesGrouped[];
     loading: boolean;
 }
 
-export const initialState: FeatureState = {
+export const initialState: CarState = {
     featuresGrouped: [],
     loading: false
 };

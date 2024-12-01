@@ -5,15 +5,15 @@ import Label from '../Label';
 
 export interface IRadioOptions {
     label: string;
-    value: string;
+    value: boolean | string;
 }
 
 interface IProps {
     label: string;
     id?: string;
-    value: string;
+    value: string | boolean;
     options: IRadioOptions[];
-    onChange: (option: string) => void;
+    onChange: (option: string | boolean) => void;
 }
 const RadioButton: React.FC<IProps> = ({ label, id, value, onChange, options }) => {
     return (

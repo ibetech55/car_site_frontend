@@ -5,7 +5,9 @@ interface IProps {
 }
 
 const LoadingComponent: React.FC<IProps> = ({ loading }) => {
-  return loading && <div className="loading"></div>;
+  return loading && <div className="loading">
+    <div className="loader"></div>
+  </div>;
 };
 
 export default LoadingComponent;

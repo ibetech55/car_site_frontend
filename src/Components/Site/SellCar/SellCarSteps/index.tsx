@@ -1,12 +1,15 @@
-import { Steps } from 'antd'
-import React from 'react'
+import { StepProps, Steps } from 'antd'
+import React, { useState } from 'react'
+import { IErrors } from '../../../../Data/CarDtos/SellCarDto';
 
 interface IProps {
     current: number;
     setCurrentChange: (current: number) => void;
+    errors: IErrors;
+    items: StepProps[];
 }
 
-const SellCarSteps: React.FC<IProps> = ({ current, setCurrentChange }) => {
+const SellCarSteps: React.FC<IProps> = ({ current, setCurrentChange, items }) => {
 
     return (
         <div>
@@ -15,36 +18,7 @@ const SellCarSteps: React.FC<IProps> = ({ current, setCurrentChange }) => {
                 onChange={setCurrentChange}
                 size="small"
                 direction="vertical"
-                items={[
-                    {
-                        title: "Details",
-                        description: "Information about car"
-                    },
-                    {
-                        title: "Price",
-                        description: "Car Price",
-                    },
-                    {
-                        title: "Condition",
-                        description: "Conditon of car",
-                    },
-                    {
-                        title: "Images",
-                        description: "Upload your car pictures",
-                    },
-                    {
-                        title: "Features",
-                        description: "Select car features",
-                    },
-                    {
-                        title: "Comments",
-                        description: "Select car features",
-                    },
-                    {
-                        title: "Personal Information",
-                        description: "Information about seller",
-                    }
-                ]}
+                items={items}
             />
         </div>
     )

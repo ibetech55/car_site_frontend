@@ -1,6 +1,7 @@
 .sell-car-images {
     &__default {
         height: 350px;
+        margin-bottom: 1rem;
 
         &__img-div {
             height: 100%;
@@ -18,7 +19,15 @@
         }
     }
 
+    &__multiple {
+        margin-bottom: 1rem;
+    }
+
     &__multiple-images {
         margin-top: 3rem;
+    }
+
+    &__error {
+        padding-bottom: 2rem;
     }
 }

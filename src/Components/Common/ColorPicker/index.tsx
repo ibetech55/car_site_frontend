@@ -2,6 +2,7 @@ import { Card, Col, Dropdown, Row, Typography } from 'antd'
 import React, { useState } from 'react'
 import "./index.scss";
 import Label from '../Label';
+import { error } from 'console';
 
 export interface IColors {
     color: string;

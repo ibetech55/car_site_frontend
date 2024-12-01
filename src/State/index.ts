@@ -3,7 +3,7 @@ import AuthSlice from "./Auth/AuthSlice";
 import BrandSlice from "./Brand/BrandSlice";
 import UserSlice from "./User/UserSlice";
 import LocationSlice from "./Loaction/LocationSlice";
-import FeatureSlice from "./Feature/FeatureSlice";
+import CarSlice from "./Car/CarSlice";
 
 export const store = configureStore({
     reducer: {
@@ -11,7 +11,7 @@ export const store = configureStore({
         brand: BrandSlice,
         user: UserSlice,
         location: LocationSlice,
-        feature: FeatureSlice
+        car: CarSlice
     }
 });
 

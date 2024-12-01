@@ -1,0 +1,23 @@
+.sell-car-form {
+    display: flex;
+
+    &__steps {
+        width: 20%;
+        border-right: 1px solid $gray-color;
+        min-height: 798px;
+    }
+
+    &__forms {
+        width: 80%;
+        padding-left: 3rem;
+
+        &-form {
+            width: 70%;
+        }
+
+        &-btns {
+            margin-top: 3rem;
+        }
+    }
+
+}

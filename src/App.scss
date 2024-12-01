@@ -52,6 +52,10 @@ h1 {
   color: red;
 }
 
+.error-text {
+  color: red
+}
+
 .icon-size {
   font-size: 15px;
 }
@@ -81,6 +85,7 @@ h1 {
 @import "./Components/Site/Profile/UserDetails";
 @import "./Components/Site/Dashboard/DashboardSearch";
 @import "./Components/Site/SellCar/SellCarDetails";
+@import "./Components/Site/SellCar/SellCarPrice";
 
 // Components Common
 @import "./Components/Common/Navbar/navbar";
